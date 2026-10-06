@@ -1,8 +1,8 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, Req, UseGuards } from '@nestjs/common';
-import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import type { Request } from 'express';
 import type { EnquiryCreated } from '@brandviserproductions/contracts';
 import { CacheControl } from '../../common/decorators/cache-control.decorator.js';
+import { RateLimit, RateLimitGuard } from '../../common/guards/rate-limit.guard.js';
 import { CreateEnquiryDto } from './dto/create-enquiry.dto.js';
 import { QuickEnquiryDto } from './dto/quick-enquiry.dto.js';
 import { EnquiriesService, type RequestMeta } from './enquiries.service.js';
@@ -15,8 +15,8 @@ const meta = (req: Request): RequestMeta => ({ ip: req.ip, userAgent: req.get('u
  */
 @Controller({ path: 'enquiries', version: '1' })
 @CacheControl('no-store')
-@UseGuards(ThrottlerGuard)
-@Throttle({ default: { limit: 5, ttl: 60_000 } })
+@UseGuards(RateLimitGuard)
+@RateLimit({ limit: 5, windowMs: 60_000 })
 export class EnquiriesController {
   constructor(private readonly enquiries: EnquiriesService) {}
 

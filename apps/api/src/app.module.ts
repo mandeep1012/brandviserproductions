@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
-import { ThrottlerModule } from '@nestjs/throttler';
 import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.js';
 import { CacheControlInterceptor } from './common/interceptors/cache-control.interceptor.js';
 import { validateEnv } from './config/env.validation.js';
@@ -24,8 +23,6 @@ import { PrismaModule } from './prisma/prisma.module.js';
   imports: [
     // On Vercel, env vars are injected into process.env; .env is only for local development.
     ConfigModule.forRoot({ isGlobal: true, cache: true, validate: validateEnv }),
-    // Limits are set per controller with @Throttle; only the guarded write routes use them.
-    ThrottlerModule.forRoot([{ name: 'default', ttl: 60_000, limit: 60 }]),
     PrismaModule,
     NotificationsModule,
     RevalidationModule,
