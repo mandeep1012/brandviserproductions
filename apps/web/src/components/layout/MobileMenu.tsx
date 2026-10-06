@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { ENQUIRY_HREF, isActive, PRIMARY_NAV } from '@/lib/navigation';
 import { cn } from '@/lib/utils';
+import { BrandMark } from './Logo';
 
 export function MobileMenu() {
   const pathname = usePathname();
@@ -25,7 +26,10 @@ export function MobileMenu() {
       </SheetTrigger>
       <SheetContent side="right" className="w-full max-w-sm border-rule bg-paper">
         <SheetHeader className="border-b border-rule">
-          <SheetTitle className="font-serif text-2xl font-normal tracking-[0.02em]">BRANDVISER</SheetTitle>
+          <SheetTitle className="flex items-center gap-2.5 font-serif text-2xl font-normal tracking-[0.02em]">
+            <BrandMark />
+            BRANDVISER
+          </SheetTitle>
           <SheetDescription className="sr-only">Site navigation</SheetDescription>
         </SheetHeader>
         <nav aria-label="Mobile" className="px-4">
