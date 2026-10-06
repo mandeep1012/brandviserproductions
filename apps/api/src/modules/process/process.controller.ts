@@ -8,7 +8,7 @@ import { ProcessService } from './process.service.js';
 export class ProcessController {
   constructor(private readonly process: ProcessService) {}
 
-  /** GET /api/v1/process-steps: Meet & Agree → Execute & Report. */
+  /** GET /api/v1/process-steps: Meet & Agree → Build & Execute. */
   @Get()
   list(): Promise<ProcessStep[]> {
     return this.process.list();

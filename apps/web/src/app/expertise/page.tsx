@@ -18,7 +18,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: 'Our Expertise',
   description:
-    'Concept & Execution, BTL, ATL, Digital Campaigns and Production: five practices under one roof, one plan and one point of contact.',
+    'Events, BTL, ATL, Digital and Production: five practices under one roof, one plan and one point of contact.',
 };
 
 export default async function ExpertisePage() {
