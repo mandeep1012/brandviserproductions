@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Service, SiteInfo } from '@brandviserproductions/contracts';
 import { isPlaceholder, mailHref, telHref } from '@/lib/contact-links';
 import { COMPANY_NAV } from '@/lib/navigation';
+import { BrandMark } from './Logo';
 
 function ContactLines({ site }: { site: SiteInfo }) {
   return (
@@ -22,7 +23,10 @@ export function SiteFooter({ site, services }: { site: SiteInfo | null; services
       {/* Desktop: four columns */}
       <div className="hidden grid-cols-[2fr_1fr_1fr_1.5fr] gap-6 text-[15px] leading-7 md:grid">
         <div>
-          <p className="font-serif text-[28px] leading-none tracking-[0.02em]">BRANDVISER</p>
+          <p className="flex items-center gap-2.5 font-serif text-[28px] leading-none tracking-[0.02em]">
+            <BrandMark className="md:h-9" />
+            BRANDVISER
+          </p>
           {site && <p className="text-small mt-4 max-w-80 text-navy-muted">{site.description}</p>}
         </div>
         <nav aria-label="Expertise">
@@ -57,7 +61,10 @@ export function SiteFooter({ site, services }: { site: SiteInfo | null; services
 
       {/* Mobile: collapsible rows */}
       <div className="text-base md:hidden">
-        <p className="mb-6 font-serif text-[26px] leading-none tracking-[0.02em]">BRANDVISER</p>
+        <p className="mb-6 flex items-center gap-2.5 font-serif text-[26px] leading-none tracking-[0.02em]">
+          <BrandMark />
+          BRANDVISER
+        </p>
         {[
           { title: 'Expertise', items: expertise },
           { title: 'Company', items: COMPANY_NAV },

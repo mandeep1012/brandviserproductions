@@ -93,7 +93,7 @@ model ClientLogo {
 
 // ── Expertise ──
 
-/// One of the five practices: Concept & Execution, BTL, ATL, Digital Campaigns, Production.
+/// One of the five practices: Events (Concept & Execution), BTL, ATL, Digital Campaigns, Production Services.
 model Service {
   id           String   @id @default(cuid())
   slug         String   @unique @db.VarChar(80)

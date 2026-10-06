@@ -19,7 +19,9 @@ export const metadata: Metadata = {
   title: { default: `${SITE_NAME} · 360° event & brand activation agency`, template: `%s · ${SITE_NAME}` },
   description:
     'Concept, production, on-ground activation and digital amplification from one accountable team.',
+  // Icons and the share image come from the icon/apple-icon/favicon/opengraph-image files in this folder.
   openGraph: { type: 'website', siteName: SITE_NAME, locale: 'en_IN' },
+  twitter: { card: 'summary_large_image' },
 };
 
 export const viewport: Viewport = { themeColor: '#FAF7F2' };
