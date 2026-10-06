@@ -1,0 +1,19 @@
+# Local Postgres for development. Production uses Neon via the Vercel Marketplace.
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: bvp
+      POSTGRES_PASSWORD: bvp
+      POSTGRES_DB: brandviserproductions
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bvp -d brandviserproductions"]
+      interval: 5s
+      retries: 10
+volumes:
+  pgdata:

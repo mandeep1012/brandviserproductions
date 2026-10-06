@@ -1,0 +1,260 @@
+// Prisma 7: the connection URL lives in prisma.config.ts, and the client is generated
+// into src/ so it ships inside the Vercel Function bundle (no Rust engine binary needed).
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ── Enums (mirrored by @brandviserproductions/contracts) ──
+
+/// The five event types used by the gallery tabs, the matrix and the enquiry forms.
+enum EventType {
+  CORPORATE
+  PRODUCT_LAUNCH
+  CONFERENCE
+  BRAND_ACTIVATION
+  EXHIBITION
+}
+
+/// Placeholder bands. Confirm with BRANDVISER before launch.
+enum AudienceSize {
+  UNDER_100
+  FROM_100_TO_500
+  FROM_500_TO_2000
+  OVER_2000
+}
+
+/// Placeholder bands (INR). Confirm with BRANDVISER before launch.
+enum BudgetRange {
+  UNDER_5L
+  FROM_5L_TO_15L
+  FROM_15L_TO_50L
+  OVER_50L
+  NOT_SURE
+}
+
+enum FaqPage {
+  EXPERTISE
+  CONTACT
+}
+
+enum EnquirySource {
+  HOME_QUICK
+  CONTACT
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  WON
+  LOST
+}
+
+// ── Site-wide content ──
+
+/// Single row (id = 1): contact details and headline stats shown in the header, footer,
+/// home stats row, about stats band and contact page.
+model SiteSettings {
+  id              Int      @id @default(1)
+  description     String   @db.VarChar(280)
+  phone           String   @db.VarChar(40)
+  whatsapp        String   @db.VarChar(40)
+  email           String   @db.VarChar(160)
+  address         String   @db.VarChar(280)
+  hours           String   @db.VarChar(160)
+  mapUrl          String
+  mapImageUrl     String?
+  citiesCovered   Int?
+  clientBrands    Int?
+  eventsDelivered Int?
+  yearsExperience Int?
+  updatedAt       DateTime @updatedAt
+}
+
+model ClientLogo {
+  id          String   @id @default(cuid())
+  name        String   @db.VarChar(120)
+  logoUrl     String?
+  sortOrder   Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isPublished, sortOrder])
+}
+
+// ── Expertise ──
+
+/// One of the five practices: Concept & Execution, BTL, ATL, Digital Campaigns, Production.
+model Service {
+  id           String   @id @default(cuid())
+  slug         String   @unique @db.VarChar(80)
+  /// Display number, e.g. "01".
+  number       String   @db.VarChar(4)
+  name         String   @db.VarChar(120)
+  /// Short label for tags, chips and the matrix header, e.g. "Digital".
+  shortName    String   @db.VarChar(40)
+  /// One-line summary for the home cards.
+  line         String   @db.VarChar(200)
+  description  String   @db.Text
+  deliverables String[] @default([])
+  imageUrl     String?
+  sortOrder    Int      @default(0)
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  offerings   EventTypeOffering[]
+  caseStudies CaseStudy[]
+
+  @@index([isPublished, sortOrder])
+}
+
+/// "What each event type draws on": one row per (event type, service) that is typically included.
+model EventTypeOffering {
+  eventType EventType
+  serviceId String
+  service   Service   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([eventType, serviceId])
+}
+
+model ProcessStep {
+  id          String   @id @default(cuid())
+  number      String   @db.VarChar(4)
+  name        String   @db.VarChar(80)
+  /// Short line used on home and mobile.
+  line        String   @db.VarChar(200)
+  /// Longer description used on About & Process.
+  detail      String   @db.Text
+  /// "You get" on About & Process.
+  deliverable String   @db.VarChar(120)
+  /// "Typical time", e.g. "1–3 days".
+  duration    String?  @db.VarChar(60)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+// ── Gallery ──
+
+model CaseStudy {
+  id            String    @id @default(cuid())
+  slug          String    @unique @db.VarChar(120)
+  client        String    @db.VarChar(120)
+  title         String    @db.VarChar(160)
+  eventType     EventType
+  city          String    @db.VarChar(80)
+  eventDate     DateTime  @db.Date
+  summary       String    @db.VarChar(400)
+  body          String    @db.Text
+  coverImageUrl String
+  gallery       String[]  @default([])
+  attendees     Int?
+  citiesCount   Int?
+  days          Int?
+  sortOrder     Int       @default(0)
+  isFeatured    Boolean   @default(false)
+  isPublished   Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  services     Service[]
+  testimonials Testimonial[]
+
+  @@index([isPublished, eventType, eventDate])
+  @@index([isPublished, isFeatured])
+  @@index([isPublished, city])
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  quote       String   @db.Text
+  name        String   @db.VarChar(120)
+  role        String   @db.VarChar(120)
+  company     String   @db.VarChar(120)
+  sortOrder   Int      @default(0)
+  isFeatured  Boolean  @default(false)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  caseStudyId String?
+  caseStudy   CaseStudy? @relation(fields: [caseStudyId], references: [id], onDelete: SetNull)
+
+  @@index([isPublished, sortOrder])
+  @@index([caseStudyId])
+}
+
+// ── About ──
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String   @db.VarChar(120)
+  role        String   @db.VarChar(120)
+  portraitUrl String?
+  sortOrder   Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isPublished, sortOrder])
+}
+
+model Faq {
+  id          String   @id @default(cuid())
+  page        FaqPage
+  question    String   @db.VarChar(200)
+  answer      String   @db.Text
+  sortOrder   Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([page, isPublished, sortOrder])
+}
+
+// ── Leads ──
+
+/// A submission from the contact form or the home quick form.
+model Enquiry {
+  id             String        @id @default(cuid())
+  /// Sequential number behind the human reference (BV-2026-0042).
+  number         Int           @unique @default(autoincrement())
+  reference      String?       @unique @db.VarChar(20)
+  source         EnquirySource
+  status         EnquiryStatus @default(NEW)
+  serviceSlugs   String[]      @default([])
+  eventType      EventType?
+  city           String?       @db.VarChar(80)
+  eventMonth     String?       @db.VarChar(40)
+  audienceSize   AudienceSize?
+  budgetRange    BudgetRange?
+  name           String        @db.VarChar(120)
+  company        String?       @db.VarChar(120)
+  email          String?       @db.VarChar(160)
+  phone          String        @db.VarChar(40)
+  brief          String?       @db.Text
+  attachmentUrl  String?
+  attachmentName String?       @db.VarChar(200)
+  consentAt      DateTime?
+  /// SHA-256 of the client IP, for abuse investigation without storing the raw address.
+  ipHash         String?       @db.VarChar(64)
+  userAgent      String?       @db.VarChar(300)
+  notifiedAt     DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([status, createdAt])
+  @@index([createdAt])
+}

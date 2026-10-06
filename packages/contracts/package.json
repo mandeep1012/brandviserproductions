@@ -1,0 +1,12 @@
+{
+  "name": "@brandviserproductions/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Type-only API contract shared by the api and web apps. No runtime code, so no build step.",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts"
+    }
+  }
+}

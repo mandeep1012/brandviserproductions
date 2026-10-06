@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+.env
+.env*.local
+.vercel/
+apps/api/src/generated/
+next-env.d.ts
+.DS_Store
+
+# Added by `vercel integration add neon` (agent skills, not app code)
+apps/api/.agents/
+apps/api/.claude/
+apps/api/skills-lock.json

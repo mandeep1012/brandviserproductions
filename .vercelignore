@@ -1,0 +1,13 @@
+# CLI deploys upload from the repo root; keep secrets and build output out of the upload.
+**/.env
+**/.env.local
+**/.env.*.local
+**/node_modules
+**/.next
+**/dist
+**/.vercel
+apps/api/src/generated
+.github
+apps/api/.agents
+apps/api/.claude
+apps/api/skills-lock.json

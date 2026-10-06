@@ -1,0 +1,112 @@
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { ClientLogos } from '@/components/common/ClientLogos';
+import { Eyebrow } from '@/components/common/Eyebrow';
+import { FaqList } from '@/components/common/FaqList';
+import { Section } from '@/components/common/Section';
+import { SectionHeading } from '@/components/common/SectionHeading';
+import { DirectLines, NextSteps, Office, QuickContactButtons } from '@/components/contact/ContactDetails';
+import { EnquiryForm } from '@/components/contact/EnquiryForm';
+import { MapLink } from '@/components/contact/MapLink';
+import { SchedulerButton } from '@/components/contact/SchedulerButton';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { api, optional } from '@/lib/api/server';
+
+export const revalidate = 300;
+
+export const metadata: Metadata = {
+  title: 'Contact & Booking',
+  description: 'Tell us about your event. We reply within one working day.',
+};
+
+export default async function ContactPage() {
+  const [site, services, faqs, testimonials] = await Promise.all([
+    optional(api.site()),
+    api.services(),
+    optional(api.faqs('CONTACT')),
+    optional(api.testimonials({ featured: true, limit: 1 })),
+  ]);
+  const quote = testimonials?.[0];
+
+  return (
+    <>
+      <section className="grid gap-6 pt-8 pb-12 md:gutter lg:grid-cols-12 lg:items-start lg:gap-6 lg:pt-20 lg:pb-24">
+        <div className="flex flex-col gap-3 px-4 md:px-0 lg:col-span-5 lg:gap-6 lg:pr-12">
+          <Eyebrow>Contact</Eyebrow>
+          <h1 className="text-h1">Tell us about your event.</h1>
+          <p>We reply within one working day.</p>
+          {site && <QuickContactButtons site={site} />}
+          <div className="hidden flex-col gap-6 lg:flex">
+            {site && <DirectLines site={site} />}
+            {site && <Office site={site} />}
+            <NextSteps variant="compact" />
+            {(site?.clientLogos.length || quote) && (
+              <div className="border-t border-rule pt-5">
+                {site && <ClientLogos logos={site.clientLogos} columns={4} className="grid-cols-4 gap-3 md:gap-3 [&>li]:h-11" />}
+                {quote && (
+                  <p className="text-small mt-4 text-slate">
+                    “{quote.quote}” — {quote.name}, {quote.company}
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div
+          id="enquiry"
+          className="mx-4 scroll-mt-20 rounded-lg border border-rule bg-card px-4 py-6 md:mx-0 md:p-10 lg:col-span-7"
+        >
+          <Suspense fallback={<Skeleton className="h-150 bg-placeholder" />}>
+            <EnquiryForm services={services} phone={site?.phone ?? null} />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* Mobile: next steps, office and booking below the form */}
+      <div className="lg:hidden">
+        <Section spacing="compact">
+          <h2 className="text-h2 mb-4">What happens next</h2>
+          <NextSteps variant="rows" />
+        </Section>
+        {site && (
+          <Section tone="white" spacing="compact" id="book" className="flex flex-col gap-3">
+            <p className="eyebrow text-slate">Office</p>
+            <address className="not-italic">{site.address}</address>
+            <p className="text-small text-slate">{site.hours}</p>
+            <Button asChild variant="outline" className="mt-2">
+              <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+                Open in Maps
+              </a>
+            </Button>
+            <SchedulerButton label="Book a 30-minute call" />
+          </Section>
+        )}
+      </div>
+
+      {/* Desktop: booking band and map */}
+      <div className="hidden lg:block">
+        <Section tone="white" spacing="compact" id="book-desktop" className="flex items-center justify-between">
+          <div>
+            <h2 className="text-h2">Prefer to talk?</h2>
+            <p className="text-small mt-3 text-slate">Pick a 30-minute slot that suits you.</p>
+          </div>
+          <SchedulerButton />
+        </Section>
+        {site && (
+          <Section spacing="compact">
+            <MapLink mapUrl={site.mapUrl} imageUrl={site.mapImageUrl} address={site.address} />
+          </Section>
+        )}
+      </div>
+
+      {faqs && faqs.length > 0 && (
+        <Section className="lg:pt-8">
+          <SectionHeading title="Before you write" className="md:mb-10" />
+          <FaqList faqs={faqs} />
+        </Section>
+      )}
+    </>
+  );
+}
