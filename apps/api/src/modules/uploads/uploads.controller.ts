@@ -10,10 +10,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
 import type { Request } from 'express';
 import { CacheControl } from '../../common/decorators/cache-control.decorator.js';
+import { RateLimit, RateLimitGuard } from '../../common/guards/rate-limit.guard.js';
 import type { Env } from '../../config/env.validation.js';
 
 export const MAX_BRIEF_BYTES = 10 * 1024 * 1024;
@@ -30,8 +30,8 @@ const BRIEF_PATH = /^briefs\/[\w .()-]{1,160}\.pdf$/i;
  */
 @Controller({ path: 'uploads', version: '1' })
 @CacheControl('no-store')
-@UseGuards(ThrottlerGuard)
-@Throttle({ default: { limit: 10, ttl: 60_000 } })
+@UseGuards(RateLimitGuard)
+@RateLimit({ limit: 10, windowMs: 60_000 })
 export class UploadsController {
   constructor(private readonly config: ConfigService<Env, true>) {}
 
