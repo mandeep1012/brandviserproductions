@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google';
 import type { ReactNode } from 'react';
@@ -47,6 +48,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <MobileContactBar site={site} />
           <Toaster position="top-center" />
         </QueryProvider>
+        <Analytics />
       </body>
     </html>
   );
