@@ -5,6 +5,7 @@ import { Eyebrow } from '@/components/common/Eyebrow';
 import { FaqList } from '@/components/common/FaqList';
 import { Section } from '@/components/common/Section';
 import { SectionHeading } from '@/components/common/SectionHeading';
+import { TestimonialCompany } from '@/components/common/Testimonials';
 import { DirectLines, NextSteps, Office, QuickContactButtons } from '@/components/contact/ContactDetails';
 import { EnquiryForm } from '@/components/contact/EnquiryForm';
 import { MapLink } from '@/components/contact/MapLink';
@@ -47,9 +48,12 @@ export default async function ContactPage() {
               <div className="border-t border-rule pt-5">
                 {site && <ClientLogos logos={site.clientLogos} columns={4} className="grid-cols-4 gap-3 md:gap-3 [&>li]:h-11" />}
                 {quote && (
-                  <p className="text-small mt-4 text-slate">
-                    “{quote.quote}” — {quote.name}, {quote.company}
-                  </p>
+                  <figure className="mt-4 flex flex-col gap-3">
+                    <blockquote className="text-small text-slate">“{quote.quote}”</blockquote>
+                    <figcaption>
+                      <TestimonialCompany company={quote.company} logos={site?.clientLogos ?? []} className="h-7 w-28" />
+                    </figcaption>
+                  </figure>
                 )}
               </div>
             )}
