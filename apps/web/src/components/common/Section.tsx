@@ -1,12 +1,13 @@
 import type { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-type Tone = 'paper' | 'white' | 'navy';
+type Tone = 'paper' | 'white' | 'midnight' | 'navy';
 
 const tones: Record<Tone, string> = {
   paper: '',
   white: 'bg-card border-y border-rule',
-  navy: 'bg-navy text-paper',
+  midnight: 'surface-dark bg-midnight',
+  navy: 'surface-dark bg-navy',
 };
 
 /** Full-width band with the page gutter and the standard vertical rhythm (48px mobile, 96px desktop). */
@@ -28,4 +29,9 @@ export function Section({
       {...props}
     />
   );
+}
+
+/** The metallic hairline between a dark band and its neighbours. */
+export function GoldRule({ className }: { className?: string }) {
+  return <div aria-hidden="true" className={cn('gold-rule', className)} />;
 }

@@ -11,7 +11,13 @@ import { api, optional } from '@/lib/api/server';
 import { SITE_NAME, SITE_URL } from '@/lib/config';
 import './globals.css';
 
-const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', variable: '--font-instrument-serif' });
+// The italic carries the gold accent words in headlines.
+const serif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+});
 const sans = Geist({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-geist' });
 const mono = Geist_Mono({ subsets: ['latin'], weight: '500', variable: '--font-geist-mono' });
 

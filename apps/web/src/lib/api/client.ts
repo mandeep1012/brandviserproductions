@@ -1,11 +1,4 @@
-import type {
-  CaseStudyQuery,
-  CaseStudySummary,
-  CreateEnquiryRequest,
-  EnquiryCreated,
-  Paginated,
-  QuickEnquiryRequest,
-} from '@brandviserproductions/contracts';
+import type { CreateEnquiryRequest, EnquiryCreated, QuickEnquiryRequest } from '@brandviserproductions/contracts';
 import { API_BASE } from '../config';
 import { endpoints } from './endpoints';
 import { ApiError, toApiError } from './errors';
@@ -27,8 +20,6 @@ async function clientFetch<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const apiClient = {
-  caseStudies: (query: CaseStudyQuery, signal?: AbortSignal) =>
-    clientFetch<Paginated<CaseStudySummary>>(endpoints.caseStudies(query), { signal }),
   createEnquiry: (body: CreateEnquiryRequest) =>
     clientFetch<EnquiryCreated>(endpoints.enquiries(), { method: 'POST', body: JSON.stringify(body) }),
   createQuickEnquiry: (body: QuickEnquiryRequest) =>

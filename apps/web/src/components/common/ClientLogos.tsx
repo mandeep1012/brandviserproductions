@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import type { ClientLogo } from '@brandviserproductions/contracts';
 import { cn } from '@/lib/utils';
 
@@ -23,5 +24,41 @@ export function ClientLogos({ logos, columns = 6, className }: { logos: ClientLo
         </li>
       ))}
     </ul>
+  );
+}
+
+/**
+ * Every client logo on a slow, continuous scroll. The list is rendered twice (the copy hidden
+ * from assistive tech) so the loop has no seam; it pauses on hover and, for reduced motion,
+ * becomes a plain horizontally scrollable row.
+ */
+export function ClientLogoMarquee({ logos, className }: { logos: ClientLogo[]; className?: string }) {
+  if (logos.length === 0) return null;
+  return (
+    <div
+      className={cn(
+        'group overflow-hidden mask-x-from-90% mask-x-to-100% motion-reduce:overflow-x-auto',
+        className,
+      )}
+    >
+      <div
+        className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+        style={{ '--marquee-duration': `${logos.length * 3}s` } as CSSProperties}
+      >
+        {[false, true].map((copy) => (
+          <ul key={String(copy)} aria-hidden={copy || undefined} className={cn('flex flex-none', copy && 'motion-reduce:hidden')}>
+            {logos.map((logo) => (
+              <li key={logo.id} className="relative mx-4 flex h-10 w-28 flex-none items-center justify-center md:mx-6 md:h-12 md:w-36">
+                {logo.logoUrl ? (
+                  <Image src={logo.logoUrl} alt={copy ? '' : logo.name} fill sizes="144px" className="object-contain" />
+                ) : (
+                  <span className="eyebrow text-center text-slate">{logo.name}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
   );
 }

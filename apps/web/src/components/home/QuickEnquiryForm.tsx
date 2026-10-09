@@ -76,7 +76,7 @@ export function QuickEnquiryForm() {
         />
       </FormField>
       <Honeypot register={() => form.register('website')} />
-      <Button type="submit" disabled={submit.isPending} className="lg:mt-7">
+      <Button type="submit" variant="gold" disabled={submit.isPending} className="lg:mt-7">
         {submit.isPending && <Loader2 className="animate-spin" aria-hidden="true" />}
         Enquire
       </Button>

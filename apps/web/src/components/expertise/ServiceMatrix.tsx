@@ -6,7 +6,7 @@ export function ServiceMatrix({ matrix }: { matrix: Matrix }) {
   return (
     <>
       <div className="hidden md:block">
-        <table className="w-full border-collapse border-t border-ink text-[15px]">
+        <table className="w-full border-collapse border-t-2 border-navy text-[15px]">
           <caption className="sr-only">Services typically included for each event type</caption>
           <thead>
             <tr>
@@ -32,7 +32,7 @@ export function ServiceMatrix({ matrix }: { matrix: Matrix }) {
                     <td key={service.slug} className="border-b border-rule p-4 text-center">
                       {included ? (
                         <>
-                          <span aria-hidden="true">●</span>
+                          <span aria-hidden="true" className="text-gold-700">●</span>
                           <span className="sr-only">Included</span>
                         </>
                       ) : (
@@ -45,7 +45,7 @@ export function ServiceMatrix({ matrix }: { matrix: Matrix }) {
             ))}
           </tbody>
         </table>
-        <p className="text-small mt-3 text-slate">● = typically included. Every brief gets its own mix.</p>
+        <p className="text-small mt-3 text-slate"><span className="text-gold-700">●</span> = typically included. Every brief gets its own mix.</p>
       </div>
       <ul className="flex flex-col gap-3 md:hidden">
         {matrix.rows.map((row) => (

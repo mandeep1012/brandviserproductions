@@ -128,7 +128,7 @@ export function EnquiryForm({ services, phone }: EnquiryFormProps) {
                       key={service.slug}
                       className={cn(
                         'inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-sm border border-rule bg-card px-3 text-[15px]',
-                        checked && 'border-ink',
+                        checked && 'border-navy bg-gold-100/40',
                       )}
                     >
                       <Checkbox

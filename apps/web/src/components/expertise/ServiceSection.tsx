@@ -20,7 +20,7 @@ export function ServiceSection({ service }: { service: Service }) {
         className="aspect-video md:aspect-auto md:h-100"
       />
       <div className="flex flex-col gap-3 md:gap-4">
-        <span className="mt-2 font-serif text-[30px] leading-9 text-brass md:mt-0 md:text-[40px] md:leading-[46px]">
+        <span className="mt-2 self-start font-serif text-[36px] leading-10 text-metal md:mt-0 md:text-[48px] md:leading-[52px]">
           {service.number}
         </span>
         <h2 id={headingId} className="text-h2">
@@ -40,10 +40,10 @@ export function ServiceSection({ service }: { service: Service }) {
         <details className="group border-y border-rule md:hidden">
           <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between font-semibold">
             What we deliver
-            <span aria-hidden="true" className="group-open:hidden">
+            <span aria-hidden="true" className="text-gold-700 group-open:hidden">
               +
             </span>
-            <span aria-hidden="true" className="hidden group-open:inline">
+            <span aria-hidden="true" className="hidden text-gold-700 group-open:inline">
               −
             </span>
           </summary>
@@ -52,7 +52,7 @@ export function ServiceSection({ service }: { service: Service }) {
 
         <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-4">
           <Button asChild variant="outline">
-            <Link href={`/gallery?service=${service.slug}`}>See {service.shortName} work</Link>
+            <Link href="/gallery">See our work</Link>
           </Button>
           <Link href={`/contact?service=${service.slug}#enquiry`} className="flex min-h-12 items-center justify-center text-base">
             Enquire →

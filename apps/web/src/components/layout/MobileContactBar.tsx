@@ -12,7 +12,7 @@ export function MobileContactBar({ site }: { site: SiteInfo | null }) {
   return (
     <nav
       aria-label="Quick contact"
-      className="fixed inset-x-0 bottom-0 z-30 flex border-t border-rule bg-card p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 flex border-t-2 border-gold-500 bg-card p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] md:hidden"
     >
       <a href={phone} className={item}>
         Call
@@ -20,7 +20,7 @@ export function MobileContactBar({ site }: { site: SiteInfo | null }) {
       <a href={whatsapp} className={`${item} border-x border-rule`} target="_blank" rel="noopener noreferrer">
         WhatsApp
       </a>
-      <Link href={ENQUIRY_HREF} className={`${item} text-signal hover:text-signal-hover`}>
+      <Link href={ENQUIRY_HREF} className={`${item} text-navy hover:text-royal`}>
         Enquire
       </Link>
     </nav>

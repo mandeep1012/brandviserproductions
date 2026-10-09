@@ -33,8 +33,10 @@ export default async function ContactPage() {
     <>
       <section className="grid gap-6 pt-8 pb-12 md:gutter lg:grid-cols-12 lg:items-start lg:gap-6 lg:pt-20 lg:pb-24">
         <div className="flex flex-col gap-3 px-4 md:px-0 lg:col-span-5 lg:gap-6 lg:pr-12">
-          <Eyebrow>Contact</Eyebrow>
-          <h1 className="text-h1">Tell us about your event.</h1>
+          <Eyebrow rule>Contact</Eyebrow>
+          <h1 className="text-h1">
+            Tell us about <em className="text-metal">your event.</em>
+          </h1>
           <p>We reply within one working day.</p>
           {site && <QuickContactButtons site={site} />}
           <div className="hidden flex-col gap-6 lg:flex">
@@ -56,7 +58,7 @@ export default async function ContactPage() {
 
         <div
           id="enquiry"
-          className="mx-4 scroll-mt-20 rounded-lg border border-rule bg-card px-4 py-6 md:mx-0 md:p-10 lg:col-span-7"
+          className="gold-edge mx-4 scroll-mt-20 rounded-lg border border-rule bg-card px-4 py-6 md:mx-0 md:p-10 lg:col-span-7"
         >
           <Suspense fallback={<Skeleton className="h-150 bg-placeholder" />}>
             <EnquiryForm services={services} phone={site?.phone ?? null} />
@@ -72,7 +74,7 @@ export default async function ContactPage() {
         </Section>
         {site && (
           <Section tone="white" spacing="compact" id="book" className="flex flex-col gap-3">
-            <p className="eyebrow text-slate">Office</p>
+            <p className="eyebrow text-eyebrow">Office</p>
             <address className="not-italic">{site.address}</address>
             <p className="text-small text-slate">{site.hours}</p>
             <Button asChild variant="outline" className="mt-2">
