@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { ENQUIRY_HREF, isActive, PRIMARY_NAV } from '@/lib/navigation';
 import { cn } from '@/lib/utils';
-import { BrandMark } from './Logo';
+import { Wordmark } from './Logo';
 
 export function MobileMenu() {
   const pathname = usePathname();
@@ -19,16 +19,15 @@ export function MobileMenu() {
         <button
           type="button"
           aria-label="Open menu"
-          className="flex size-11 items-center justify-center text-ink lg:hidden"
+          className="flex size-11 items-center justify-center text-navy lg:hidden"
         >
           <Menu className="size-5" strokeWidth={1.5} aria-hidden="true" />
         </button>
       </SheetTrigger>
       <SheetContent side="right" className="w-full max-w-sm border-rule bg-paper">
         <SheetHeader className="border-b border-rule">
-          <SheetTitle className="flex items-center gap-2.5 font-serif text-2xl font-normal tracking-[0.02em]">
-            <BrandMark />
-            BRANDVISER
+          <SheetTitle className="font-normal">
+            <Wordmark />
           </SheetTitle>
           <SheetDescription className="sr-only">Site navigation</SheetDescription>
         </SheetHeader>
@@ -42,7 +41,10 @@ export function MobileMenu() {
                     href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? 'page' : undefined}
-                    className={cn('flex min-h-14 items-center text-lg text-ink hover:text-ink', active && 'font-semibold')}
+                    className={cn(
+                      'flex min-h-14 items-center gap-3 text-lg text-ink hover:text-navy',
+                      active && 'font-semibold text-navy before:h-5 before:w-0.5 before:bg-gold-500',
+                    )}
                   >
                     {item.label}
                   </Link>

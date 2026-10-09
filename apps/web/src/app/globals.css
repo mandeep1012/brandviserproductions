@@ -2,22 +2,40 @@
 @import "tw-animate-css";
 
 /*
- * BRANDVISER design tokens (from the wireframe's design system), mapped onto the
- * variables shadcn/ui components read. Light theme only, as the system defines.
+ * BRANDVISER "Navy & Gold" design tokens, sampled from the logo, mapped onto the variables
+ * shadcn/ui components read. Navy carries the page; gold is the finish (hairlines, display
+ * numerals, the primary action on dark bands), never body text on a light ground.
  */
 :root {
-  --paper: #faf7f2;
+  /* Palette */
+  --paper: #fbf9f4; /* Ivory: page ground */
   --card-white: #ffffff;
-  --ink: #14181f;
-  --navy: #1b2a4a;
-  --slate: #5b6470;
-  --signal: #ae4e2b;
-  --signal-hover: #8c3d21;
-  --brass: #b08a3e;
-  --rule: #e4ded4;
-  --placeholder: #e9e3d8;
-  --navy-muted: #c9cfda;
-  --navy-rule: #3a4a6b;
+  --ink: #0e1a30;
+  --slate: #5a6577;
+  --rule: #e5e0d5;
+  --placeholder: #ece8df;
+  --midnight: #081a38;
+  --navy: #0f2a55;
+  --navy-raised: #13284f;
+  --royal: #0158a6;
+  --mist: #aeb8cc;
+  --rule-dark: #2a3f66;
+  --gold-100: #f6e9cc;
+  --gold-300: #e6c98c;
+  --gold-500: #c9a15f;
+  --gold-700: #8c6a2e;
+
+  /* Metallic gold. Text gradients keep every stop at 3:1 or better on their ground. */
+  --gold-line: linear-gradient(90deg, #a87232, #e9c57e 35%, #f6d797 50%, #dbac5e 65%, #a87232);
+  --gold-fill: linear-gradient(100deg, #c18a3f 0%, #e9c57e 35%, #f6d797 50%, #dbac5e 68%, #c18a3f 100%);
+  --metal-text: linear-gradient(100deg, #6e4f1c 0%, #8c6a2e 30%, #a3783a 50%, #8c6a2e 70%, #6e4f1c 100%);
+
+  /* Roles that change on dark bands (see .surface-dark) */
+  --heading: var(--navy);
+  --eyebrow: var(--slate);
+  --link: var(--royal);
+  --link-hover: var(--navy);
+  --outline: var(--navy);
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -25,7 +43,7 @@
   --card-foreground: var(--ink);
   --popover: var(--card-white);
   --popover-foreground: var(--ink);
-  --primary: var(--signal);
+  --primary: var(--navy);
   --primary-foreground: #ffffff;
   --secondary: var(--placeholder);
   --secondary-foreground: var(--ink);
@@ -36,8 +54,39 @@
   --destructive: #b42318;
   --border: var(--rule);
   --input: var(--rule);
-  --ring: var(--signal);
+  --ring: var(--royal);
   --radius: 4px;
+}
+
+/*
+ * Midnight and navy bands. Inside one, the neutral tokens (ink, slate, rule, placeholder,
+ * card) and the roles above switch to their dark-ground values, so components need no
+ * per-band classes: `text-slate` is Mist here, `border-rule` is the dark hairline.
+ */
+.surface-dark {
+  --ink: #fbf9f4;
+  --slate: var(--mist);
+  --rule: var(--rule-dark);
+  --placeholder: var(--navy-raised);
+  --card-white: var(--navy-raised);
+  --metal-text: linear-gradient(100deg, #b07a33 0%, #dbac5e 30%, #f6d797 50%, #d7a65a 70%, #b07a33 100%);
+
+  --heading: #fbf9f4;
+  --eyebrow: var(--gold-300);
+  --link: var(--gold-300);
+  --link-hover: var(--gold-100);
+  --outline: var(--gold-500);
+
+  --background: var(--midnight);
+  --foreground: #fbf9f4;
+  --card: var(--navy-raised);
+  --card-foreground: #fbf9f4;
+  --muted-foreground: var(--mist);
+  --destructive: #fca5a5;
+  --border: var(--rule-dark);
+  --input: var(--rule-dark);
+  --ring: var(--gold-300);
+  color: var(--foreground);
 }
 
 @theme inline {
@@ -62,15 +111,22 @@
 
   --color-paper: var(--paper);
   --color-ink: var(--ink);
-  --color-navy: var(--navy);
-  --color-navy-muted: var(--navy-muted);
-  --color-navy-rule: var(--navy-rule);
   --color-slate: var(--slate);
-  --color-signal: var(--signal);
-  --color-signal-hover: var(--signal-hover);
-  --color-brass: var(--brass);
   --color-rule: var(--rule);
   --color-placeholder: var(--placeholder);
+  --color-midnight: var(--midnight);
+  --color-navy: var(--navy);
+  --color-royal: var(--royal);
+  --color-mist: var(--mist);
+  --color-gold-100: var(--gold-100);
+  --color-gold-300: var(--gold-300);
+  --color-gold-500: var(--gold-500);
+  --color-gold-700: var(--gold-700);
+  --color-heading: var(--heading);
+  --color-eyebrow: var(--eyebrow);
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-outline: var(--outline);
 
   --radius-sm: 2px;
   --radius-md: 4px;
@@ -80,6 +136,14 @@
   --font-serif: var(--font-instrument-serif), Georgia, serif;
   --font-sans: var(--font-geist), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Logo strip: the track holds the list twice, so sliding it half its width loops seamlessly. */
+  --animate-marquee: marquee var(--marquee-duration, 60s) linear infinite;
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 @layer base {
@@ -96,11 +160,20 @@
     font-size: 17px;
     line-height: 28px;
   }
+  h1,
+  h2,
+  h3 {
+    color: var(--heading);
+  }
   a {
-    @apply text-signal hover:text-signal-hover;
+    @apply text-link hover:text-link-hover;
+  }
+  ::selection {
+    background-color: var(--gold-100);
+    color: #0e1a30;
   }
   :focus-visible {
-    outline: 2px solid var(--signal);
+    outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -168,4 +241,42 @@
 /* Page gutter: 16px on mobile, 112px at the 1440 desktop width, fluid in between. */
 @utility gutter {
   padding-inline: clamp(1rem, 9.14vw - 1.23rem, 7rem);
+}
+
+/* Metallic gold, see the tokens above. */
+@utility gold-rule {
+  height: 2px;
+  background-image: var(--gold-line);
+}
+/* A 2px gold edge along the top of a card; keeps the card's own background colour. */
+@utility gold-edge {
+  background-image: var(--gold-line);
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+}
+/* Gold gradient text for numerals and accent words at display sizes (24px and up). */
+@utility text-metal {
+  background-image: var(--metal-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+/* Eyebrow led by a short gold rule, echoing the line beside "PRODUCTIONS" in the logo. */
+@utility eyebrow-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  &::before {
+    content: '';
+    flex: none;
+    width: 1.5rem;
+    height: 1px;
+    background-image: var(--gold-line);
+  }
+  @media (width >= 48rem) {
+    gap: 0.75rem;
+    &::before {
+      width: 2rem;
+    }
+  }
 }

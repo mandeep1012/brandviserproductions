@@ -16,7 +16,11 @@ export function SectionHeading({ title, eyebrow, link, as: Heading = 'h2', class
   return (
     <div className={cn('mb-6 flex flex-col gap-3 md:mb-12 md:flex-row md:items-end md:justify-between', className)}>
       <div>
-        {eyebrow && <Eyebrow className="mb-2 md:mb-3">{eyebrow}</Eyebrow>}
+        {eyebrow && (
+          <Eyebrow rule className="mb-2 md:mb-3">
+            {eyebrow}
+          </Eyebrow>
+        )}
         <Heading className="text-h2">{title}</Heading>
       </div>
       {link && (

@@ -1,7 +1,7 @@
 /**
- * Seeds the site content. Services, process, testimonials, client logos, gallery photography, team
- * and contact details are migrated from BRANDVISER's previous website (firefoxproductions.in) and
- * public company records. Bracketed text is a placeholder for what only BRANDVISER can confirm
+ * Seeds the site content. Services follow BRANDVISER's website content sheet ("Final Our Services").
+ * Process, testimonials, client logos, gallery photography, team and contact details are migrated
+ * from BRANDVISER's previous website (firefoxproductions.in) and public company records. Bracketed text is a placeholder for what only BRANDVISER can confirm
  * (testimonial names, FAQ answers, event details for gallery photos).
  * Re-runnable: content tables are replaced; enquiries are never touched.
  *
@@ -25,93 +25,94 @@ const photo = (name: string) => `/migrated/gallery/${name}.jpg`;
 
 const services = [
   {
-    slug: 'concept-execution',
+    slug: 'events-experiential',
     number: '01',
-    name: 'Events: Concept & Execution',
-    shortName: 'Concept',
-    line: 'Corporate events, conferences and seminars, planned and run end to end.',
+    name: 'Events & Experiential',
+    shortName: 'Experiential',
+    line: 'Brand activations, launches and immersive experiences, designed around your objectives.',
     description:
-      'We start by understanding the requirement and objective of your event, then plan and run every part of it. For conferences, conventions and business meetings we offer partial or full conference management, so your time is free and the event runs smoothly, looks professional and stays within budget.',
+      'Exceptional events happen by design, not by chance. We bridge the gap between business objectives and creative disruption: pop-up shops, mobile tours, interactive booths and brand installations, captured on camera and amplified online so the story lives on long after the lights dim.',
     deliverables: [
-      'Corporate events',
-      'Conferences and seminars',
-      'Partial or full conference management',
-      'Venue selection',
-      'Corporate outings and off-sites',
-      'Sponsorship events',
-    ],
-    imageUrl: '/migrated/services/concept-execution.jpg',
-  },
-  {
-    slug: 'btl',
-    number: '02',
-    name: 'BTL Campaigns',
-    shortName: 'BTL',
-    line: 'Activations, mall promotions, roadshows and retail branding.',
-    description:
-      'BTL activations put your brand in front of the people you want to reach, and build a relationship with customers that turns into brand loyalty and sales leads.',
-    deliverables: [
-      'RWA activities',
-      'Mall promotions',
-      'Metro branding',
-      'Store branding',
-      'Roadshows',
-      'Lookman walkers',
-      'Newspaper inserts',
-      'No-parking boards and signage',
+      'Concept development and strategy',
+      'Immersive event production',
+      'Brand activations: sampling, roadshows, RWA, mall and metro branding',
+      'Product launches and live demos',
+      'Gamified engagement',
+      'Content creation, capture and amplification',
+      'Merchandise and swag',
+      'Print media solutions',
     ],
     imageUrl: '/migrated/services/btl.jpg',
   },
   {
-    slug: 'atl',
-    number: '03',
-    name: 'ATL Campaigns',
-    shortName: 'ATL',
-    line: 'Television, radio, cinema and outdoor media.',
+    slug: 'corporate-events',
+    number: '02',
+    name: 'Corporate Event Services',
+    shortName: 'Corporate',
+    line: 'Internal and external events: family days, employee meets, dealer meets and launches.',
     description:
-      'Mass-media promotion that reaches a large audience and builds brand awareness. Audio and visual together grab attention at scale: you share your plan, we get you the traffic.',
-    deliverables: ['Television advertising', 'Radio ads', 'Theatre ads and branding', 'OOH media'],
-    imageUrl: '/migrated/services/atl.jpg',
-  },
-  {
-    slug: 'digital-campaigns',
-    number: '04',
-    name: 'Digital Campaigns',
-    shortName: 'Digital',
-    line: 'Search, social, email and influencer marketing.',
-    description:
-      'We promote your brand across digital channels and create the traffic that leads to better sales and marketing.',
-    deliverables: ['Search engine marketing', 'Social media marketing', 'Email marketing', 'Influencer marketing'],
-    imageUrl: '/migrated/services/digital-campaigns.jpg',
-  },
-  {
-    slug: 'production',
-    number: '05',
-    name: 'Production Services',
-    shortName: 'Production',
-    line: 'Stage, AV, fabrication and print, delivered across the country.',
-    description:
-      'Our production team delivers the technical side that makes an event sparkle, with in-house production at venues across the country. We only get one chance to get it right, so we never underestimate production. For print, we offer single-window support with easy call logging across 600 locations, at no extra cost.',
+      'Internal events that lift morale and strengthen company culture, and external events that build relationships and business. From family days and annual employee meets to dealer meets, networking evenings and product launches, we run everything from start to finish.',
     deliverables: [
-      'Stage set-up for every seating arrangement',
-      'Audio design and lighting',
-      'Presentation support',
-      'Flyers, standees and banners',
-      'Merchandise: T-shirts, mugs, calendars and diaries',
-      'Exhibition displays',
-      'Marketing collateral',
+      'Family days and sports days',
+      'Annual employee meets and gala dinners',
+      'Team building and training',
+      'Onsite celebrations at offices',
+      'Networking and social events',
+      'Dealer meets',
+      'Product launches',
+      'Conferences, seminars and CSR events',
     ],
-    imageUrl: '/migrated/services/production.jpg',
+    imageUrl: photo('visa-btc-stage'),
+  },
+  {
+    slug: 'business-conferences',
+    number: '03',
+    name: 'Business Conferences & Team Offsites',
+    shortName: 'Conferences',
+    line: 'Venue sourcing, delegate management and conference production, in India and abroad.',
+    description:
+      'We source venues through a stringent RFQ process to get competitive bids from business centres, hotels and resorts, then handle theme and branding, delegate registration, hotels and travel. On the day, we deliver world-class conference production and engagement that keeps every session lively.',
+    deliverables: [
+      'Venue sourcing',
+      'Theme and branding',
+      'Delegate registration',
+      'Conference production and AV',
+      'Hotel and travel services',
+      'Gamified engagement activities',
+      'Artist management',
+      'Gala awards ceremonies',
+    ],
+    imageUrl: '/migrated/services/concept-execution.jpg',
+  },
+  {
+    slug: 'mice-international',
+    number: '04',
+    name: 'International MICE',
+    shortName: 'MICE',
+    line: 'Meetings, incentives, conferences and retreats at destinations worldwide.',
+    description:
+      'We take your teams and partners abroad and handle the details: flights, visas, hotels at competitive rates and ground transport, with the safety and well-being of every traveller in mind. Our destination guides help you pick the right location, then we plan the conference, celebrations, excursions and dining around it.',
+    deliverables: [
+      'Travel management',
+      'Visa assistance and flight bookings',
+      'Hotel selection',
+      'Conferences and retreats',
+      'Milestone celebrations',
+      'Destination guides',
+      'Sightseeing, excursions and dining experiences',
+      'Team building and gala awards',
+    ],
+    imageUrl: photo('delegation-2024-banquet'),
   },
 ];
 
 /** "What each event type draws on". Indicative; confirm against BRANDVISER's real service mix. */
 const matrix: Record<EventType, string[]> = {
-  CORPORATE: ['concept-execution', 'digital-campaigns', 'production'],
-  PRODUCT_LAUNCH: ['concept-execution', 'btl', 'atl', 'digital-campaigns', 'production'],
-  CONFERENCE: ['concept-execution', 'digital-campaigns', 'production'],
-  BRAND_ACTIVATION: ['concept-execution', 'btl', 'digital-campaigns', 'production'],
-  EXHIBITION: ['concept-execution', 'btl', 'production'],
+  CORPORATE: ['corporate-events', 'business-conferences', 'mice-international'],
+  PRODUCT_LAUNCH: ['events-experiential', 'corporate-events'],
+  CONFERENCE: ['corporate-events', 'business-conferences', 'mice-international'],
+  BRAND_ACTIVATION: ['events-experiential'],
+  EXHIBITION: ['events-experiential'],
 };
 
 const processSteps = [
@@ -196,7 +197,7 @@ const caseStudies: Array<{
     summary: "An employee walkathon for Visa's Women's Network, with branding, kits and on-ground management.",
     photos: ['visa-walkathon-2024'],
     isFeatured: true,
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['corporate-events'],
   },
   {
     slug: 'groww-india-kamaega-invest',
@@ -208,7 +209,7 @@ const caseStudies: Array<{
     summary: "An investor-education session under Groww's \"India Kamaega Invest\" banner: venue, stage, AV and branding.",
     photos: ['groww-india-kamaega-invest'],
     isFeatured: true,
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['business-conferences'],
   },
   {
     slug: 'swiggy-mangaluru-launch',
@@ -220,7 +221,7 @@ const caseStudies: Array<{
     summary: 'A mall stage activation announcing "Swiggy is coming to Mangaluru!", with live engagement for shoppers.',
     photos: ['swiggy-mangaluru-launch'],
     isFeatured: true,
-    serviceSlugs: ['btl', 'production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'international-delegation-programme-2024',
@@ -238,7 +239,7 @@ const caseStudies: Array<{
       'delegation-2024-meeting',
     ],
     days: 2,
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['business-conferences', 'mice-international'],
   },
   {
     slug: 'visa-bangalore-technology-centre',
@@ -249,7 +250,7 @@ const caseStudies: Array<{
     eventDate: day(2023, 4, 12),
     summary: 'Branded "Grow, Build, Connect, Uplift" standees and entrance set-up for an employee event at the Visa Bangalore Technology Centre.',
     photos: ['visa-btc-entrance'],
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['corporate-events'],
   },
   {
     slug: 'visa-cultural-evening',
@@ -260,7 +261,7 @@ const caseStudies: Array<{
     eventDate: day(2025, 1), // approx.
     summary: 'Stage, lighting and performers for a Visa employee celebration.',
     photos: ['visa-btc-stage'],
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['corporate-events'],
   },
   {
     slug: 'the-glenlivet-brand-evening',
@@ -271,7 +272,7 @@ const caseStudies: Array<{
     eventDate: day(2025, 1), // approx.
     summary: 'A lit, branded guest entrance with The Glenlivet light-box cubes.',
     photos: ['glenlivet-evening'],
-    serviceSlugs: ['btl', 'production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'sbi-card-kiosk',
@@ -282,7 +283,7 @@ const caseStudies: Array<{
     eventDate: day(2025, 1), // approx.
     summary: 'A fabricated, illuminated SBI Card kiosk with on-ground staff for customer acquisition.',
     photos: ['sbi-card-kiosk'],
-    serviceSlugs: ['btl', 'production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'car-launch-showroom-unveil',
@@ -293,7 +294,7 @@ const caseStudies: Array<{
     eventDate: day(2025, 1), // approx.
     summary: 'A showroom unveiling with draped reveal, balloon décor, LED backdrop and a launch-day photo moment.',
     photos: ['car-launch-unveil', 'car-launch-showroom'],
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['events-experiential', 'corporate-events'],
   },
   {
     slug: 'groww-office-decor',
@@ -304,7 +305,7 @@ const caseStudies: Array<{
     eventDate: day(2025, 1), // approx.
     summary: 'Festive lanterns and installations across a Groww office reception.',
     photos: ['groww-office-decor'],
-    serviceSlugs: ['production'],
+    serviceSlugs: ['corporate-events'],
   },
   {
     slug: 'ib-cricket-vr-zone',
@@ -315,7 +316,7 @@ const caseStudies: Array<{
     eventDate: day(2025, 1), // approx.
     summary: 'A turfed VR cricket zone with branded LED screen, where guests faced "the world\'s most played VR cricket".',
     photos: ['ib-cricket-vr'],
-    serviceSlugs: ['btl', 'production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'conference-stage-and-av-2024',
@@ -326,7 +327,7 @@ const caseStudies: Array<{
     eventDate: day(2024, 11, 7),
     summary: 'A ballroom conference with LED wall, side screens, truss lighting and a panel stage.',
     photos: ['conference-ballroom-stage'],
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['business-conferences'],
   },
   {
     slug: 'conferences-and-seminars',
@@ -337,7 +338,7 @@ const caseStudies: Array<{
     eventDate: day(2025, 1), // approx.
     summary: 'Roundtable sessions, auditorium seminars and boardroom meetings, with stage, screens and branding.',
     photos: ['conference-roundtables', 'conference-chandelier-hall', 'conference-auditorium', 'conference-boardroom'],
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['business-conferences'],
   },
   {
     slug: 'google-product-activations',
@@ -348,7 +349,7 @@ const caseStudies: Array<{
     eventDate: day(2016), // approx.
     summary: 'Branded Google stages and demo zones in a mall atrium and an office lobby, with promoter teams.',
     photos: ['google-mall-stage', 'google-office-activation'],
-    serviceSlugs: ['btl', 'production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'swiggy-brand-stage-and-office',
@@ -359,7 +360,7 @@ const caseStudies: Array<{
     eventDate: day(2020), // approx.
     summary: 'An outdoor Swiggy stage with truss, LED screen and branded cubes, plus a branded office mural wall.',
     photos: ['swiggy-stage', 'swiggy-brand-wall'],
-    serviceSlugs: ['btl', 'production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'tech-park-employee-engagement',
@@ -370,7 +371,7 @@ const caseStudies: Array<{
     eventDate: day(2020), // approx.
     summary: 'Branded game zones in an office-campus plaza, drawing crowds of employees.',
     photos: ['tech-park-engagement', 'tech-park-engagement-2'],
-    serviceSlugs: ['concept-execution', 'btl'],
+    serviceSlugs: ['corporate-events', 'events-experiential'],
   },
   {
     slug: 'fujitsu-family-day-2016',
@@ -381,7 +382,7 @@ const caseStudies: Array<{
     eventDate: day(2016),
     summary: 'An outdoor employee family day with stilt walkers and a branded photo frame.',
     photos: ['fujitsu-family-day-2016'],
-    serviceSlugs: ['concept-execution'],
+    serviceSlugs: ['corporate-events'],
   },
   {
     slug: 'emc-vmware-hybrid-cloud-launch',
@@ -392,7 +393,7 @@ const caseStudies: Array<{
     eventDate: day(2017), // approx.
     summary: 'A launch stage with triple screens and lighting for "Hybrid Cloud Redefined".',
     photos: ['emc-vmware-hybrid-cloud'],
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['corporate-events'],
   },
   {
     slug: 'jaguar-xf-display',
@@ -403,7 +404,7 @@ const caseStudies: Array<{
     eventDate: day(2017), // approx.
     summary: 'A display platform with branded XF towers and lighting for a Jaguar showcase.',
     photos: ['jaguar-xf-display'],
-    serviceSlugs: ['production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'siemens-exhibition-stall',
@@ -414,7 +415,7 @@ const caseStudies: Array<{
     eventDate: day(2017), // approx.
     summary: 'A fabricated Siemens exhibition stall with product display bays and a reception counter.',
     photos: ['siemens-exhibition-stall'],
-    serviceSlugs: ['production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'uber-mobile-van',
@@ -425,7 +426,7 @@ const caseStudies: Array<{
     eventDate: day(2020), // approx.
     summary: 'A branded mobile van for Uber driver-partner attachment, on the road across neighbourhoods.',
     photos: ['uber-mobile-van'],
-    serviceSlugs: ['btl'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'ola-on-ground-activation',
@@ -436,7 +437,7 @@ const caseStudies: Array<{
     eventDate: day(2020), // approx.
     summary: 'An Ola canopy stall with branded backdrop and promoters engaging visitors.',
     photos: ['ola-activation'],
-    serviceSlugs: ['btl'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'vlcc-store-branding',
@@ -447,7 +448,7 @@ const caseStudies: Array<{
     eventDate: day(2020), // approx.
     summary: 'Facade signage and bilingual store branding for a VLCC centre.',
     photos: ['vlcc-store-branding'],
-    serviceSlugs: ['btl', 'production'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'sugar-mall-branding',
@@ -458,7 +459,7 @@ const caseStudies: Array<{
     eventDate: day(2020), // approx.
     summary: 'Large-format SUGAR Cosmetics branding and display panels in a mall atrium.',
     photos: ['sugar-mall-branding'],
-    serviceSlugs: ['btl', 'atl'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'grofers-stall',
@@ -469,7 +470,7 @@ const caseStudies: Array<{
     eventDate: day(2020), // approx.
     summary: 'A Grofers stall at a corporate campus, with branding and a promoter team.',
     photos: ['grofers-stall'],
-    serviceSlugs: ['btl'],
+    serviceSlugs: ['events-experiential'],
   },
   {
     slug: 'decor-and-experiences',
@@ -480,7 +481,7 @@ const caseStudies: Array<{
     eventDate: day(2018), // approx.
     summary: 'Fairy-light canopies, outdoor lounges, campus fests and fitness activations.',
     photos: ['fairy-light-venue', 'outdoor-lounge-decor', 'campus-fest', 'fitness-activation'],
-    serviceSlugs: ['concept-execution', 'production'],
+    serviceSlugs: ['events-experiential', 'corporate-events'],
   },
 ];
 
@@ -534,33 +535,47 @@ const team = [
   { name: 'Jainendra Kumar', role: 'Director' },
 ];
 
-/** Ordered for the logo strips: the first six show on most pages, the first four on Contact. */
-const clientLogos: Array<[name: string, file: string]> = [
-  ['Google', 'google.jpg'],
-  ['Swiggy', 'swiggy.jpg'],
-  ['HSBC', 'hsbc.jpg'],
-  ['American Express', 'american-express.jpg'],
-  ['Tata', 'tata.jpg'],
-  ['Uber', 'uber.jpg'],
-  ['Ola', 'ola.jpg'],
-  ['Harley-Davidson', 'harley-davidson.jpg'],
-  ['1mg', '1mg.jpg'],
-  ['Grofers', 'grofers.jpg'],
-  ['Udaan', 'udaan.jpg'],
-  ['VLCC', 'vlcc.jpg'],
-  ['Shriram Properties', 'shriram-properties.jpg'],
-  ['Cuemath', 'cuemath.jpg'],
-  ['FreshMenu', 'freshmenu.jpg'],
-  ['NestAway', 'nestaway.jpg'],
-  ['Bodycraft', 'bodycraft.jpg'],
-  ['Shadowfax', 'shadowfax.jpg'],
-  ['L&T Mutual Fund', 'lt-mutual-fund.png'],
-  ['IIFL Mutual Fund', 'iifl-mutual-fund.jpg'],
-  ['Mirae Asset', 'mirae-asset.png'],
-  ['Hyperconnect', 'hyperconnect.png'],
-  ['Logicserve', 'logicserve.jpg'],
-  ['Sanjay Ghodawat Group', 'sanjay-ghodawat-group.jpg'],
-  ['CNTC Hong Kong', 'cntc-hong-kong.jpg'],
+/**
+ * Ordered for the logo strips: the Home strip scrolls through all of them, Contact shows the first four.
+ * The client's deck list (colour logos in /clients) leads; the remaining logos carried over from the
+ * old site follow. Paths are under apps/web/public.
+ */
+const clientLogos: Array<[name: string, path: string]> = [
+  ['HDFC Bank', '/clients/hdfc-bank.svg'],
+  ['Visa', '/clients/visa.svg'],
+  ['BMW Motorrad', '/clients/bmw-motorrad.svg'],
+  ['Uber', '/clients/uber.svg'],
+  ['Tata 1mg', '/clients/tata-1mg.png'],
+  ['Gates Foundation', '/clients/gates-foundation.svg'],
+  ['Ola', '/clients/ola.svg'],
+  ['Groww', '/clients/groww.png'],
+  ['Mirae Asset', '/clients/mirae-asset.svg'],
+  ['CoinDCX', '/clients/coindcx.svg'],
+  ['Porter', '/clients/porter.svg'],
+  ['Swish', '/clients/swish.png'],
+  ['Royal Oak', '/clients/royal-oak.png'],
+  ['Truefitt & Hill', '/clients/truefitt-hill.png'],
+  ['Bodycraft', '/clients/bodycraft.svg'],
+  ['L&T Mutual Fund', '/clients/lt-mutual-fund.png'],
+  ['Shriram Properties', '/clients/shriram-properties.png'],
+  ['IIIT Bangalore', '/clients/iiit-bangalore.svg'],
+  ['Google', '/migrated/clients/google.jpg'],
+  ['Swiggy', '/migrated/clients/swiggy.jpg'],
+  ['HSBC', '/migrated/clients/hsbc.jpg'],
+  ['American Express', '/migrated/clients/american-express.jpg'],
+  ['Harley-Davidson', '/migrated/clients/harley-davidson.jpg'],
+  ['Grofers', '/migrated/clients/grofers.jpg'],
+  ['Udaan', '/migrated/clients/udaan.jpg'],
+  ['VLCC', '/migrated/clients/vlcc.jpg'],
+  ['Cuemath', '/migrated/clients/cuemath.jpg'],
+  ['FreshMenu', '/migrated/clients/freshmenu.jpg'],
+  ['NestAway', '/migrated/clients/nestaway.jpg'],
+  ['Shadowfax', '/migrated/clients/shadowfax.jpg'],
+  ['IIFL Mutual Fund', '/migrated/clients/iifl-mutual-fund.jpg'],
+  ['Hyperconnect', '/migrated/clients/hyperconnect.png'],
+  ['Logicserve', '/migrated/clients/logicserve.jpg'],
+  ['Sanjay Ghodawat Group', '/migrated/clients/sanjay-ghodawat-group.jpg'],
+  ['CNTC Hong Kong', '/migrated/clients/cntc-hong-kong.jpg'],
 ];
 
 const address = '#404, 1st Floor, 17th C Main Road, KHB Colony, Koramangala 5th Block, Bengaluru 560095';
@@ -645,7 +660,7 @@ async function main(): Promise<void> {
     });
 
     await tx.clientLogo.createMany({
-      data: clientLogos.map(([name, file], index) => ({ name, logoUrl: `/migrated/clients/${file}`, sortOrder: index })),
+      data: clientLogos.map(([name, logoUrl], index) => ({ name, logoUrl, sortOrder: index })),
     });
     // Dozens of round trips: allow for a remote database, not just a local one.
   }, { timeout: 60_000, maxWait: 10_000 });

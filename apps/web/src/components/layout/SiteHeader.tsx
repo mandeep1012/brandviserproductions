@@ -10,6 +10,7 @@ export function SiteHeader({ phone }: { phone: string | null }) {
   const callHref = phone && !isPlaceholder(phone) ? telHref(phone) : '/contact';
   return (
     <header className="sticky top-0 z-40 border-b border-rule bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/85">
+      <div aria-hidden="true" className="gold-rule h-[3px]" />
       <div className="flex h-14 items-center justify-between pr-2 pl-4 lg:gutter lg:h-18">
         <Logo />
         <MainNav />
@@ -18,7 +19,7 @@ export function SiteHeader({ phone }: { phone: string | null }) {
           <Link
             href={callHref}
             aria-label="Call us"
-            className="flex size-11 items-center justify-center text-ink hover:text-ink"
+            className="flex size-11 items-center justify-center text-navy hover:text-royal"
           >
             <Phone className="size-5" strokeWidth={1.5} aria-hidden="true" />
           </Link>

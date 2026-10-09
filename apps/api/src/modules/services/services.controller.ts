@@ -8,7 +8,7 @@ import { ServicesService } from './services.service.js';
 export class ServicesController {
   constructor(private readonly services: ServicesService) {}
 
-  /** GET /api/v1/services: the five practices with their deliverables. */
+  /** GET /api/v1/services: the four practices with their deliverables. */
   @Get()
   list(): Promise<Service[]> {
     return this.services.list();

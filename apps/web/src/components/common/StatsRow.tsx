@@ -11,7 +11,8 @@ const LABELS: Record<keyof SiteStats, { long: string; short: string }> = {
 interface StatsRowProps {
   stats: SiteStats;
   keys: Array<keyof SiteStats>;
-  tone?: 'paper' | 'navy';
+  /** `metal`: gold numerals, for stats on a dark band. */
+  metal?: boolean;
   className?: string;
 }
 
@@ -19,7 +20,7 @@ interface StatsRowProps {
  * Headline numbers. Stats BRANDVISER hasn't confirmed yet (null) are left out, and the row
  * disappears entirely when none are set.
  */
-export function StatsRow({ stats, keys, tone = 'paper', className }: StatsRowProps) {
+export function StatsRow({ stats, keys, metal = false, className }: StatsRowProps) {
   const shown = keys.filter((key) => stats[key] !== null);
   if (shown.length === 0) return null;
   return (
@@ -32,11 +33,11 @@ export function StatsRow({ stats, keys, tone = 'paper', className }: StatsRowPro
     >
       {shown.map((key) => (
         <div key={key} className="flex flex-col-reverse gap-1 md:gap-2">
-          <dt className={cn('eyebrow', tone === 'navy' ? 'text-navy-muted' : 'text-slate')}>
+          <dt className="eyebrow text-slate">
             <span className="md:hidden">{LABELS[key].short}</span>
             <span className="hidden md:inline">{LABELS[key].long}</span>
           </dt>
-          <dd className={cn(tone === 'navy' ? 'text-h1' : 'text-h2 md:text-h1')}>
+          <dd className={cn('text-h2 md:text-h1', metal && 'self-start text-metal')}>
             {stats[key]!.toLocaleString('en-IN')}+
           </dd>
         </div>

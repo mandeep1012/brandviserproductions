@@ -7,14 +7,13 @@ export const PRIMARY_NAV: NavItem[] = [
   { href: '/', label: 'Home' },
   { href: '/expertise', label: 'Our Expertise' },
   { href: '/gallery', label: 'Gallery' },
-  { href: '/about', label: 'About & Process' },
+  { href: '/moments', label: 'Moments' },
   { href: '/contact', label: 'Contact' },
 ];
 
 export const COMPANY_NAV: NavItem[] = [
-  { href: '/about', label: 'About' },
-  { href: '/about#process', label: 'Process' },
   { href: '/gallery', label: 'Gallery' },
+  { href: '/moments', label: 'Moments' },
   { href: '/contact', label: 'Contact' },
 ];
 

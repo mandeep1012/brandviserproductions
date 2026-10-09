@@ -1,29 +1,26 @@
 import type { Metadata } from 'next';
 import { CtaBand } from '@/components/common/CtaBand';
 import { Eyebrow } from '@/components/common/Eyebrow';
+import { CaseStudyGrid } from '@/components/gallery/CaseStudyGrid';
 import { FeaturedCase } from '@/components/gallery/FeaturedCase';
-import { GalleryBrowser } from '@/components/gallery/GalleryBrowser';
 import { api, optional } from '@/lib/api/server';
-import { hasFilters, parseGalleryParams, toApiQuery } from '@/lib/gallery';
 import { ENQUIRY_HREF } from '@/lib/navigation';
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: 'Gallery',
   description: 'Corporate events, product launches, brand activations, conferences and exhibitions staged by BRANDVISER.',
 };
 
-export default async function GalleryPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const { filters, page } = parseGalleryParams(await searchParams);
-  const showFeatured = !hasFilters(filters) && page === 1;
+/** The API's largest page size: the whole gallery in one request. */
+const GALLERY_LIMIT = 48;
 
+export default async function GalleryPage() {
   const [facets, results, featuredList] = await Promise.all([
     api.caseStudyFacets(),
-    api.caseStudies(toApiQuery(filters, page)),
-    showFeatured ? optional(api.caseStudies({ featured: true, limit: 1 })) : null,
+    api.caseStudies({ limit: GALLERY_LIMIT }),
+    optional(api.caseStudies({ featured: true, limit: 1 })),
   ]);
   const featuredSlug = featuredList?.items[0]?.slug;
   const featured = featuredSlug ? await optional(api.caseStudy(featuredSlug)) : null;
@@ -31,19 +28,20 @@ export default async function GalleryPage({
   return (
     <>
       <section className="gutter flex flex-col gap-3 pt-8 pb-6 md:pt-16 md:pb-12">
-        <Eyebrow>The gallery</Eyebrow>
-        <h1 className="text-h1">Work we have staged.</h1>
+        <Eyebrow rule>The gallery</Eyebrow>
+        <h1 className="text-h1">
+          Work we have <em className="text-metal">staged.</em>
+        </h1>
         <p className="text-small text-slate">
           {facets.totalEvents} events · {facets.totalCities} cities
         </p>
       </section>
 
-      <GalleryBrowser
-        facets={facets}
-        filters={filters}
-        initialPage={results}
-        featured={featured ? <FeaturedCase study={featured} /> : null}
-      />
+      {featured && <FeaturedCase study={featured} />}
+
+      <section aria-label="Case studies" className="gutter pt-6 pb-12 md:pt-4 md:pb-16">
+        <CaseStudyGrid studies={results.items} />
+      </section>
 
       <CtaBand
         title="Planning something like this?"

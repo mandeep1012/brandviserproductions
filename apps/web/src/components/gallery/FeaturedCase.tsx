@@ -5,7 +5,7 @@ import { Eyebrow } from '@/components/common/Eyebrow';
 import { Button } from '@/components/ui/button';
 import { caseStudyMeta, caseStudyTitle } from './CaseStudyMeta';
 
-/** Large featured case study at the top of the unfiltered gallery. */
+/** Large featured case study at the top of the gallery. */
 export function FeaturedCase({ study }: { study: CaseStudyDetail }) {
   const numbers = [
     { label: 'Attendees', value: study.attendees },
@@ -26,7 +26,7 @@ export function FeaturedCase({ study }: { study: CaseStudyDetail }) {
         className="aspect-[4/3] md:col-span-8 md:aspect-auto md:h-105"
       />
       <div className="flex flex-col gap-2 md:col-span-4 md:gap-4 md:pl-6">
-        <Eyebrow>Featured case study</Eyebrow>
+        <Eyebrow rule>Featured case study</Eyebrow>
         <h2 id="featured-heading" className="text-h2">
           {caseStudyTitle(study)}
         </h2>
@@ -36,7 +36,7 @@ export function FeaturedCase({ study }: { study: CaseStudyDetail }) {
             {numbers.map((n) => (
               <div key={n.label} className="flex flex-col-reverse">
                 <dt className="eyebrow text-slate">{n.label}</dt>
-                <dd className="text-h3">{n.value.toLocaleString('en-IN')}</dd>
+                <dd className="self-start font-serif text-[30px] leading-9 text-metal">{n.value.toLocaleString('en-IN')}</dd>
               </div>
             ))}
           </dl>

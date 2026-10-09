@@ -18,7 +18,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: 'Our Expertise',
   description:
-    'Events, BTL, ATL, Digital and Production: five practices under one roof, one plan and one point of contact.',
+    'Events & experiential, corporate events, business conferences and international MICE: four practices under one roof, one plan and one point of contact.',
 };
 
 export default async function ExpertisePage() {
@@ -36,10 +36,12 @@ export default async function ExpertisePage() {
 
       <section className="gutter grid gap-6 pt-4 pb-8 md:grid-cols-12 md:items-center md:pt-12 md:pb-20">
         <div className="flex flex-col gap-4 md:col-span-7 md:gap-5 md:pr-12">
-          <Eyebrow>Our expertise</Eyebrow>
-          <h1 className="text-h1">One team, from first idea to final teardown.</h1>
+          <Eyebrow rule>Our expertise</Eyebrow>
+          <h1 className="text-h1">
+            One team, from first idea to <em className="text-metal">final teardown.</em>
+          </h1>
           <p className="max-w-[560px]">
-            Five practices under one roof, so your campaign has one plan, one budget and one point of contact.
+            Four practices under one roof, so your event has one plan, one budget and one point of contact.
           </p>
         </div>
         <div className="grid h-50 grid-cols-[2fr_1fr] grid-rows-2 gap-3 md:col-span-5 md:h-80">

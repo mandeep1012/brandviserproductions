@@ -13,12 +13,12 @@ export function EnquirySuccess({ result }: { result: EnquiryCreated }) {
 
   return (
     <div role="status" className="flex flex-col items-start gap-4">
-      <CircleCheck className="size-8 text-signal" strokeWidth={1.5} aria-hidden="true" />
+      <CircleCheck className="size-8 text-gold-700" strokeWidth={1.5} aria-hidden="true" />
       <h2 ref={heading} tabIndex={-1} className="text-h2 outline-none">
         Thank you. Your brief is with us.
       </h2>
       <p>We&apos;ll call you within one working day to understand it.</p>
-      <div className="w-full rounded-md border border-rule bg-paper p-4">
+      <div className="gold-edge w-full rounded-md border border-rule bg-paper p-4">
         <p className="eyebrow text-slate">Your reference</p>
         <p className="text-h3 font-mono">{result.reference}</p>
       </div>

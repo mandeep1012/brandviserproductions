@@ -46,10 +46,10 @@ export function ServiceSubnav({ services }: { services: Array<Pick<Service, 'slu
                   // Mobile: chips. Desktop: underlined text links.
                   'flex min-h-11 items-center rounded-sm border border-rule bg-card px-4 text-[14px] font-medium text-ink hover:text-ink',
                   'md:min-h-0 md:rounded-none md:border-0 md:border-b-2 md:border-transparent md:bg-transparent md:px-0 md:py-1 md:text-[15px] md:font-normal',
-                  current && 'border-ink md:border-signal',
+                  current && 'border-navy text-navy md:border-gold-500',
                 )}
               >
-                <span className="md:hidden">{service.shortName === 'Concept' ? service.name : service.shortName}</span>
+                <span className="md:hidden">{service.shortName}</span>
                 <span className="hidden md:inline">{service.name}</span>
               </a>
             </li>

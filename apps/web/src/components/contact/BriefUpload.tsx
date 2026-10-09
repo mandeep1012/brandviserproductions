@@ -33,7 +33,7 @@ export function BriefUpload({ state, onSelect, onRemove }: BriefUploadProps) {
             type="file"
             accept="application/pdf,.pdf"
             aria-describedby="brief-file-hint"
-            className="text-[15px] file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-md file:border file:border-ink file:bg-transparent file:px-4 file:font-medium"
+            className="text-[15px] file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-md file:border file:border-navy file:bg-transparent file:text-navy file:px-4 file:font-medium"
             onChange={(event) => {
               const file = event.target.files?.[0];
               if (file) onSelect(file);

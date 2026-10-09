@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { ClientLogos } from '@/components/common/ClientLogos';
+import { ClientLogoMarquee } from '@/components/common/ClientLogos';
 import { Eyebrow } from '@/components/common/Eyebrow';
 import { ProcessStepsCompact } from '@/components/common/ProcessSteps';
-import { Section } from '@/components/common/Section';
+import { GoldRule, Section } from '@/components/common/Section';
 import { SectionHeading } from '@/components/common/SectionHeading';
 import { Testimonials } from '@/components/common/Testimonials';
 import { FeaturedWork } from '@/components/home/FeaturedWork';
@@ -30,58 +30,64 @@ export default async function HomePage() {
       <Hero stats={site?.stats ?? null} imageUrl={featuredStudies[0]?.coverImageUrl ?? null} />
 
       {site && site.clientLogos.length > 0 && (
-        <section className="gutter border-y border-rule py-8 md:flex md:items-center md:gap-8 md:py-10">
-          <Eyebrow className="mb-4 w-30 flex-none md:mb-0">Trusted by</Eyebrow>
-          <ClientLogos logos={site.clientLogos} className="flex-grow" />
+        <section className="gutter border-b border-rule bg-card py-8 md:flex md:items-center md:gap-8 md:py-10">
+          <Eyebrow className="mb-4 w-30 flex-none text-gold-700 md:mb-0">Trusted by</Eyebrow>
+          <ClientLogoMarquee logos={site.clientLogos} className="min-w-0 flex-grow" />
         </section>
       )}
 
       <Section>
-        <SectionHeading title="Our expertise" link={{ href: '/expertise', label: 'All services' }} />
+        <SectionHeading eyebrow="What we do" title="Our expertise" link={{ href: '/expertise', label: 'All services' }} />
         <ServiceCards services={services} />
       </Section>
 
-      <Section tone="white">
+      <Section tone="midnight">
         <SectionHeading
           eyebrow="How we work"
           title="Four steps, one point of contact."
-          link={{ href: '/about#process', label: 'Our process' }}
           className="md:mb-14"
         />
         <ProcessStepsCompact steps={steps} />
-        <Link href="/about#process" className="mt-4 flex min-h-11 items-center md:hidden">
-          Our process →
-        </Link>
       </Section>
 
       {featuredStudies.length > 0 && (
         <Section>
-          <SectionHeading title="From the gallery" link={{ href: '/gallery', label: 'All case studies' }} />
+          <SectionHeading
+            eyebrow="Selected work"
+            title="From the gallery"
+            link={{ href: '/gallery', label: 'All case studies' }}
+          />
           <FeaturedWork studies={featuredStudies} />
         </Section>
       )}
 
       {testimonials && testimonials.length > 0 && (
-        <Section className="border-t border-rule">
-          <SectionHeading title="What clients say" />
+        <Section tone="white">
+          <SectionHeading eyebrow="Testimonials" title="What clients say" />
           <Testimonials testimonials={testimonials} />
         </Section>
       )}
 
-      <Section tone="white" spacing="compact" className="border-b-0 md:py-20">
+      <Section tone="navy" spacing="compact" className="md:py-20">
         <div className="grid items-end gap-6 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <h2 className="text-h2">Have a brief? Let&apos;s meet.</h2>
+            <Eyebrow rule className="mb-2 md:mb-3">
+              Start a project
+            </Eyebrow>
+            <h2 className="text-h2">
+              Have a brief? <em className="text-metal">Let&apos;s meet.</em>
+            </h2>
             <p className="text-small mt-2 text-slate md:mt-3">We reply within one working day.</p>
           </div>
           <div className="hidden lg:contents">
             <QuickEnquiryForm />
           </div>
-          <Button asChild className="lg:hidden">
+          <Button asChild variant="gold" className="lg:hidden">
             <Link href={ENQUIRY_HREF}>Enquire</Link>
           </Button>
         </div>
       </Section>
+      <GoldRule />
     </>
   );
 }

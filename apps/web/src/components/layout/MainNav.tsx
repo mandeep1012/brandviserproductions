@@ -18,8 +18,8 @@ export function MainNav() {
                 href={item.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'border-b-2 border-transparent py-1 text-ink hover:border-rule hover:text-ink',
-                  active && 'border-signal hover:border-signal',
+                  'border-b-2 border-transparent py-1 text-ink hover:border-rule hover:text-navy',
+                  active && 'border-gold-500 text-navy hover:border-gold-500',
                 )}
               >
                 {item.label}

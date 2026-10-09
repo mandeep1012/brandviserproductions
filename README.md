@@ -30,9 +30,8 @@ web  (Next.js, Vercel)            api  (NestJS, one Vercel Function, sin1)      
 - **Reads:** pages are Server Components with ISR. They call the API at `NEXT_PUBLIC_API_URL`, and
   the responses are cached for 5 minutes under tags (`site`, `services`, `case-studies`, …). The API
   also sends `Cache-Control: s-maxage=300, stale-while-revalidate=86400`, so the CDN absorbs repeats.
-- **Gallery:** filters live in the URL (`/gallery?type=product-launch&city=Pune&year=2025&page=2`).
-  The server renders the requested page, and "Load more" (TanStack `useInfiniteQuery`) fetches the
-  next pages from the browser. Numbered page links remain as a no-JS and SEO fallback.
+- **Gallery:** a static list. The server renders the featured case study and every published case
+  study (up to the API's 48-per-page limit); there are no filters or pagination.
 - **Enquiries:**
   - The form validates in the browser (zod) and again in the API (class-validator DTOs).
   - The API stores the row, issues a reference (`BV-2026-0042`) and returns it straight away.
@@ -59,17 +58,16 @@ apps/
     src/modules/                    site · services · process · case-studies · testimonials · team · faqs
                                     enquiries · uploads · notifications · revalidation · admin · health
   web/
-    src/app/                        / · /expertise · /gallery · /gallery/[slug] · /about · /contact
+    src/app/                        / · /expertise · /gallery · /gallery/[slug] · /contact
                                     /privacy · /terms · /api/revalidate · sitemap · robots · error · not-found
     src/components/
       ui/                           shadcn/ui (restyled to the BRANDVISER tokens)
       layout/                       SiteHeader, MainNav, MobileMenu, SiteFooter, MobileContactBar
       common/                       Section, SectionHeading, EventImage, StatsRow, ClientLogos, ProcessSteps,
                                     Testimonials, FaqList, CtaBand, FormField, OptionSelect, PageSkeleton
-      home/ expertise/ gallery/ about/ contact/
+      home/ expertise/ gallery/ contact/
     src/lib/api/                    server.ts (tagged server fetch) · client.ts · hooks.ts · use-brief-upload.ts
     src/lib/validation/enquiry.ts   zod schemas that mirror the API DTOs
-    src/content/about.ts            About-page copy that lives in code
 packages/contracts/index.d.ts
 ```
 
@@ -80,7 +78,7 @@ All routes are under `/api/v1`. Public GETs are CDN-cacheable; everything else i
 | Method | Path | Notes |
 | --- | --- | --- |
 | GET | `/site` | Contact details, headline stats (null = not confirmed, hidden), client logos |
-| GET | `/services` · `/services/matrix` | Five practices with deliverables; event-type × service matrix |
+| GET | `/services` · `/services/matrix` | Four practices with deliverables; event-type × service matrix |
 | GET | `/process-steps` | Meet & Agree → Execute & Report |
 | GET | `/case-studies?type&service&city&year&featured&page&limit` | `{items,total,page,pageCount,limit}` |
 | GET | `/case-studies/facets` · `/case-studies/slugs` · `/case-studies/:slug` | Filter options and counts; sitemap; detail page |
@@ -213,7 +211,6 @@ These are placeholders in the seed and code, shown in brackets on the site:
 - Case studies, testimonials, team, client logos: admin API. Then remove the `picsum.photos` entries
   from `apps/web/next.config.ts`.
 - FAQ answers: `PATCH /admin/faqs/:id`
-- About-page story, founder quote and photo: `apps/web/src/content/about.ts`
 - Process step durations ("Typical time" is hidden while empty): `PATCH /admin/process-steps/:id`
 - Audience-size and budget bands (`AudienceSize`, `BudgetRange` in `schema.prisma`, labels in both apps)
 - The event-type × service matrix is indicative: adjust it with `eventTypes` on `PATCH /admin/services/:id`

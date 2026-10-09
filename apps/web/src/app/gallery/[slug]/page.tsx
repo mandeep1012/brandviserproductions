@@ -43,7 +43,7 @@ export default async function CaseStudyPage({ params }: Params) {
 
       <section className="gutter grid gap-6 pt-4 pb-10 md:grid-cols-12 md:items-end md:gap-6 md:pt-8 md:pb-16">
         <div className="flex flex-col gap-3 md:col-span-7 md:gap-4">
-          <Eyebrow>{EVENT_TYPE_LABELS[study.eventType]}</Eyebrow>
+          <Eyebrow rule>{EVENT_TYPE_LABELS[study.eventType]}</Eyebrow>
           <h1 className="text-h1">{caseStudyTitle(study)}</h1>
           <p className="text-small text-slate">{caseStudyMeta(study, false)}</p>
           <p className="max-w-[560px]">{study.summary}</p>
@@ -53,7 +53,7 @@ export default async function CaseStudyPage({ params }: Params) {
             {numbers.map((n) => (
               <div key={n.label} className="flex flex-col-reverse">
                 <dt className="eyebrow text-slate">{n.label}</dt>
-                <dd className="text-h2">{n.value.toLocaleString('en-IN')}</dd>
+                <dd className="self-start text-h2 text-metal">{n.value.toLocaleString('en-IN')}</dd>
               </div>
             ))}
           </dl>
@@ -79,7 +79,7 @@ export default async function CaseStudyPage({ params }: Params) {
                 <li key={service.slug}>
                   <Link
                     href={`/expertise#${service.slug}`}
-                    className="eyebrow inline-flex min-h-9 items-center rounded-sm border border-rule px-2 tracking-[0.04em] text-ink hover:border-ink hover:text-ink"
+                    className="eyebrow inline-flex min-h-9 items-center rounded-sm border border-rule px-2 tracking-[0.04em] text-ink hover:border-navy hover:text-navy"
                   >
                     {service.shortName}
                   </Link>
@@ -99,8 +99,8 @@ export default async function CaseStudyPage({ params }: Params) {
             <p key={index}>{paragraph}</p>
           ))}
           {study.testimonial && (
-            <figure className="mt-4 border-t border-ink pt-6">
-              <blockquote className="font-serif text-2xl leading-8 md:text-[30px] md:leading-[38px]">
+            <figure className="mt-4 border-t border-gold-500 pt-6">
+              <blockquote className="font-serif text-2xl leading-8 text-navy md:text-[30px] md:leading-[38px]">
                 {study.testimonial.quote}
               </blockquote>
               <figcaption className="text-small mt-3 text-slate">
