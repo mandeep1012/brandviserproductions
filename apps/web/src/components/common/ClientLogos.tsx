@@ -30,7 +30,8 @@ export function ClientLogos({ logos, columns = 6, className }: { logos: ClientLo
 /**
  * Every client logo on a slow, continuous scroll. The list is rendered twice (the copy hidden
  * from assistive tech) so the loop has no seam; it pauses on hover and, for reduced motion,
- * becomes a plain horizontally scrollable row.
+ * becomes a plain horizontally scrollable row. Logos load eagerly: lazy loading never fires for
+ * images sliding in through the clipped track, which left blank slots in the loop.
  */
 export function ClientLogoMarquee({ logos, className }: { logos: ClientLogo[]; className?: string }) {
   if (logos.length === 0) return null;
@@ -50,7 +51,14 @@ export function ClientLogoMarquee({ logos, className }: { logos: ClientLogo[]; c
             {logos.map((logo) => (
               <li key={logo.id} className="relative mx-4 flex h-10 w-28 flex-none items-center justify-center md:mx-6 md:h-12 md:w-36">
                 {logo.logoUrl ? (
-                  <Image src={logo.logoUrl} alt={copy ? '' : logo.name} fill sizes="144px" className="object-contain" />
+                  <Image
+                    src={logo.logoUrl}
+                    alt={copy ? '' : logo.name}
+                    fill
+                    sizes="144px"
+                    loading="eager"
+                    className="object-contain"
+                  />
                 ) : (
                   <span className="eyebrow text-center text-slate">{logo.name}</span>
                 )}

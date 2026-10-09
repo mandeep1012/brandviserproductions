@@ -486,47 +486,44 @@ const caseStudies: Array<{
 ];
 
 // ── Testimonials, team, clients ──
-// Quotes are verbatim from the previous site; the agency's former name is replaced with
-// "[BRANDVISER]". Reviewer names and roles were never published.
+// Quotes and the company behind each are from the client's deck (PROJECT PRESENTATION, 2025),
+// with the agency's name written "BRANDVISER". Reviewer names and roles were never published, so
+// the site credits each quote with the company's logo, matched by name against `clientLogos`.
+// Two deck quotes sit beside an empty image placeholder instead of a logo; they are left out.
 
 const testimonials = [
   {
-    company: 'Gates Foundation',
+    company: 'HSBC',
     quote:
-      '[BRANDVISER] has been a vital partner in ensuring our global delegations and foreign partners experience seamless coordination while in India. Their expertise in managing complex logistics, from high-level conferences to specialized excursions, allows our leadership to focus entirely on our mission-driven dialogues. Their professionalism and attention to detail are exceptional.',
+      'BRANDVISER is team of young enthusiastic people. They offer service in good budget and their pro activeness throughout the event is amazing. The team is helpful and genuine puts in lot of efforts in every event we do.',
+    isFeatured: true,
+  },
+  {
+    company: 'Truefitt & Hill',
+    quote:
+      'BRANDVISER has been a vital partner in ensuring our global delegations and foreign partners experience seamless coordination while in India. Their expertise in managing complex logistics, from high-level conferences to specialized excursions, allows our leadership to focus entirely on our mission-driven dialogues. Their professionalism and attention to detail are exceptional.',
+    isFeatured: true,
+  },
+  {
+    company: 'CoinDCX',
+    quote:
+      'BRANDVISER has been an exceptional partner in supporting our international events, delivering seamlessly across branding, procurement, gifting, and on-ground execution. Their attention to detail, responsiveness, and ability to bring every requirement together have made them a truly dependable partner. We highly value their professionalism and the elevated experience they consistently deliver.',
     isFeatured: true,
   },
   {
     company: 'Swiggy',
     quote:
-      'We have been working with [BRANDVISER] for over few years now, the team is dedicated to every project we throw at them at any point of time. For one time hire for the city Marketing , now the team operates nearly in 300 cities across the country for various channels. Pratyush and team is very passionate in whatever they do. Keep up the good Work.',
-    isFeatured: true,
+      'We have been working with BRANDVISER for over few years now, the team is dedicated to every project we throw at them at any point of time. For one time hire for the city Marketing, now the team operates nearly in 300 cities across the country for various channels. Pratyush and team is very passionate in whatever they do. Keep up the good Work.',
   },
   {
-    company: 'HSBC',
+    company: 'Fischer',
     quote:
-      '[BRANDVISER] is team of young enthusiastic people. They offer service in good budget and their pro activeness throughout the event is amazing. The team is helpful and genuine puts in lot of efforts in every event we do.',
-    isFeatured: true,
+      'For our off-site events and resort-based meetings, BRANDVISER consistently delivers an experience that balances professional excellence with world-class hospitality. They have a unique talent for selecting the right venues and managing the complex logistics of hosting partners in diverse locations, ensuring every guest feels valued and inspired.',
   },
   {
-    company: 'Groww',
+    company: 'Royal Oak',
     quote:
-      '[BRANDVISER] according to me is undoubtedly the best service provider in this segment. Their pro-active response, quality and timely delivery of commitments, reasonable commercials and trust make them much better from anyone else in the market. It’s always an awesome experience working with them. Kudos to the team.',
-  },
-  {
-    company: 'Royaloak',
-    quote:
-      'We have been engaging with [BRANDVISER] for all BTL events and these guys have always been good & supportive in executing all the campaigns which we plan. Very economical pricing. Maintains good relationship with their clients. They also suggest different kind of marketing campaigns which works out well. One of the best event management companies in Bengaluru.',
-  },
-  {
-    company: 'Fisher India',
-    quote:
-      'For our off-site events and resort-based meetings, [BRANDVISER] consistently delivers an experience that balances professional excellence with world-class hospitality. They have a unique talent for selecting the right venues and managing the complex logistics of hosting partners in diverse locations, ensuring every guest feels valued and inspired.',
-  },
-  {
-    company: 'MOSIP – IIIT Bangalore',
-    quote:
-      '[BRANDVISER] consistently delivers premium, well-designed brand collateral and merchandise that our global community is proud to carry. Their ability to translate our brand values into tangible products is unmatched.',
+      'We have been engaging with BRANDVISER for all BTL events and these guys have always been good & supportive in executing all the campaigns which we plan. Very economical pricing. Maintains good relationship with their clients. They also suggest different kind of marketing campaigns which works out well. One of the best event management companies in Bengaluru.',
   },
 ];
 
@@ -537,8 +534,8 @@ const team = [
 
 /**
  * Ordered for the logo strips: the Home strip scrolls through all of them, Contact shows the first four.
- * The client's deck list (colour logos in /clients) leads; the remaining logos carried over from the
- * old site follow. Paths are under apps/web/public.
+ * The client's deck list leads; the clients carried over from the old site follow, in their current
+ * colour logos (Logicserve is now LS Digital). Paths are under apps/web/public.
  */
 const clientLogos: Array<[name: string, path: string]> = [
   ['HDFC Bank', '/clients/hdfc-bank.svg'],
@@ -559,23 +556,23 @@ const clientLogos: Array<[name: string, path: string]> = [
   ['L&T Mutual Fund', '/clients/lt-mutual-fund.png'],
   ['Shriram Properties', '/clients/shriram-properties.png'],
   ['IIIT Bangalore', '/clients/iiit-bangalore.svg'],
-  ['Google', '/migrated/clients/google.jpg'],
-  ['Swiggy', '/migrated/clients/swiggy.jpg'],
-  ['HSBC', '/migrated/clients/hsbc.jpg'],
-  ['American Express', '/migrated/clients/american-express.jpg'],
-  ['Harley-Davidson', '/migrated/clients/harley-davidson.jpg'],
-  ['Grofers', '/migrated/clients/grofers.jpg'],
-  ['Udaan', '/migrated/clients/udaan.jpg'],
-  ['VLCC', '/migrated/clients/vlcc.jpg'],
-  ['Cuemath', '/migrated/clients/cuemath.jpg'],
-  ['FreshMenu', '/migrated/clients/freshmenu.jpg'],
-  ['NestAway', '/migrated/clients/nestaway.jpg'],
-  ['Shadowfax', '/migrated/clients/shadowfax.jpg'],
-  ['IIFL Mutual Fund', '/migrated/clients/iifl-mutual-fund.jpg'],
-  ['Hyperconnect', '/migrated/clients/hyperconnect.png'],
-  ['Logicserve', '/migrated/clients/logicserve.jpg'],
-  ['Sanjay Ghodawat Group', '/migrated/clients/sanjay-ghodawat-group.jpg'],
-  ['CNTC Hong Kong', '/migrated/clients/cntc-hong-kong.jpg'],
+  ['HSBC', '/clients/hsbc.svg'],
+  ['Swiggy', '/clients/swiggy.png'],
+  ['Fischer', '/clients/fischer.png'],
+  ['Google', '/clients/google.svg'],
+  ['American Express', '/clients/american-express.svg'],
+  ['Harley-Davidson', '/clients/harley-davidson.svg'],
+  ['Grofers', '/clients/grofers.svg'],
+  ['Udaan', '/clients/udaan.png'],
+  ['VLCC', '/clients/vlcc.png'],
+  ['Cuemath', '/clients/cuemath.png'],
+  ['FreshMenu', '/clients/freshmenu.png'],
+  ['NestAway', '/clients/nestaway.png'],
+  ['Shadowfax', '/clients/shadowfax.png'],
+  ['IIFL', '/clients/iifl.png'],
+  ['Hyperconnect', '/clients/hyperconnect.png'],
+  ['LS Digital', '/clients/ls-digital.png'],
+  ['Sanjay Ghodawat Group', '/clients/sanjay-ghodawat-group.png'],
 ];
 
 const address = '#404, 1st Floor, 17th C Main Road, KHB Colony, Koramangala 5th Block, Bengaluru 560095';

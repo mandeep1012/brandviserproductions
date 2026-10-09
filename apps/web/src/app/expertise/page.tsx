@@ -3,7 +3,6 @@ import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { CtaBand } from '@/components/common/CtaBand';
 import { EventImage } from '@/components/common/EventImage';
 import { Eyebrow } from '@/components/common/Eyebrow';
-import { FaqList } from '@/components/common/FaqList';
 import { ProcessStrip } from '@/components/common/ProcessSteps';
 import { Section } from '@/components/common/Section';
 import { SectionHeading } from '@/components/common/SectionHeading';
@@ -22,11 +21,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ExpertisePage() {
-  const [services, matrix, steps, faqs] = await Promise.all([
+  const [services, matrix, steps] = await Promise.all([
     api.services(),
     optional(api.serviceMatrix()),
     api.processSteps(),
-    optional(api.faqs('EXPERTISE')),
   ]);
   const collage = services.slice(0, 3);
 
@@ -74,13 +72,6 @@ export default async function ExpertisePage() {
       <Section tone="white" spacing="compact">
         <ProcessStrip steps={steps} />
       </Section>
-
-      {faqs && faqs.length > 0 && (
-        <Section>
-          <SectionHeading title="Questions buyers ask" className="md:mb-10" />
-          <FaqList faqs={faqs} />
-        </Section>
-      )}
 
       <CtaBand
         title="Not sure which you need?"

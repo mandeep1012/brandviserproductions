@@ -21,7 +21,7 @@ export default async function HomePage() {
     api.services(),
     api.processSteps(),
     optional(api.caseStudies({ featured: true, limit: 3 })),
-    optional(api.testimonials({ featured: true, limit: 3 })),
+    optional(api.testimonials()),
   ]);
   const featuredStudies = featured?.items ?? [];
 
@@ -64,7 +64,7 @@ export default async function HomePage() {
       {testimonials && testimonials.length > 0 && (
         <Section tone="white">
           <SectionHeading eyebrow="Testimonials" title="What clients say" />
-          <Testimonials testimonials={testimonials} />
+          <Testimonials testimonials={testimonials} logos={site?.clientLogos ?? []} />
         </Section>
       )}
 
