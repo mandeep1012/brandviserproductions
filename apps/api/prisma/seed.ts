@@ -495,7 +495,7 @@ const testimonials = [
   {
     company: 'HSBC',
     quote:
-      'BRANDVISER is team of young enthusiastic people. They offer service in good budget and their pro activeness throughout the event is amazing. The team is helpful and genuine puts in lot of efforts in every event we do.',
+      'BRANDVISER is a team of young enthusiastic people. They offer service in good budget and their pro activeness throughout the event is amazing. The team is helpful and genuine puts in lot of efforts in every event we do.',
     isFeatured: true,
   },
   {

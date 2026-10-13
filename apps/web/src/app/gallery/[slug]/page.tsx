@@ -7,6 +7,7 @@ import { Eyebrow } from '@/components/common/Eyebrow';
 import { Section } from '@/components/common/Section';
 import { caseStudyMeta, caseStudyTitle } from '@/components/gallery/CaseStudyMeta';
 import { api, optional } from '@/lib/api/server';
+import { hasValue } from '@/lib/contact-links';
 import { EVENT_TYPE_LABELS } from '@/lib/labels';
 import { ENQUIRY_HREF } from '@/lib/navigation';
 
@@ -95,16 +96,19 @@ export default async function CaseStudyPage({ params }: Params) {
           </div>
         </aside>
         <div className="flex flex-col gap-5 md:col-span-8">
-          {study.body.split(/\n{2,}/).map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
+          {study.body
+            .split(/\n{2,}/)
+            .filter((paragraph) => hasValue(paragraph))
+            .map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           {study.testimonial && (
             <figure className="mt-4 border-t border-gold-500 pt-6">
               <blockquote className="font-serif text-2xl leading-8 text-navy md:text-[30px] md:leading-[38px]">
                 {study.testimonial.quote}
               </blockquote>
               <figcaption className="text-small mt-3 text-slate">
-                {study.testimonial.name}, {study.testimonial.role}, {study.testimonial.company}
+                {[study.testimonial.name, study.testimonial.role, study.testimonial.company].filter(hasValue).join(', ')}
               </figcaption>
             </figure>
           )}

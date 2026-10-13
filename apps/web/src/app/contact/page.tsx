@@ -13,6 +13,7 @@ import { SchedulerButton } from '@/components/contact/SchedulerButton';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { api, optional } from '@/lib/api/server';
+import { hasValue } from '@/lib/contact-links';
 
 export const revalidate = 300;
 
@@ -29,6 +30,8 @@ export default async function ContactPage() {
     optional(api.testimonials({ featured: true, limit: 1 })),
   ]);
   const quote = testimonials?.[0];
+  // Only questions with a confirmed answer are shown; placeholder answers stay hidden until filled in.
+  const answeredFaqs = faqs?.filter((faq) => hasValue(faq.answer)) ?? [];
 
   return (
     <>
@@ -80,7 +83,7 @@ export default async function ContactPage() {
           <Section tone="white" spacing="compact" id="book" className="flex flex-col gap-3">
             <p className="eyebrow text-eyebrow">Office</p>
             <address className="not-italic">{site.address}</address>
-            <p className="text-small text-slate">{site.hours}</p>
+            {hasValue(site.hours) && <p className="text-small text-slate">{site.hours}</p>}
             <Button asChild variant="outline" className="mt-2">
               <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
                 Open in Maps
@@ -107,10 +110,10 @@ export default async function ContactPage() {
         )}
       </div>
 
-      {faqs && faqs.length > 0 && (
+      {answeredFaqs.length > 0 && (
         <Section className="lg:pt-8">
           <SectionHeading title="Before you write" className="md:mb-10" />
-          <FaqList faqs={faqs} />
+          <FaqList faqs={answeredFaqs} />
         </Section>
       )}
     </>

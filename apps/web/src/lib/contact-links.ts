@@ -7,3 +7,7 @@ export const mailHref = (email: string) => `mailto:${email}`;
 
 /** Placeholder values from the seed are bracketed; don't turn those into dead links. */
 export const isPlaceholder = (value: string) => /^\[.*\]$/.test(value.trim());
+
+/** True for a real, confirmed value: not empty and not a bracketed placeholder. Use it to hide unconfirmed content. */
+export const hasValue = (value: string | null | undefined): value is string =>
+  typeof value === 'string' && value.trim() !== '' && !isPlaceholder(value);
