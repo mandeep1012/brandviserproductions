@@ -4,10 +4,11 @@ import { Eyebrow } from '@/components/common/Eyebrow';
 /**
  * Contact: the FAQs as an editorial list, every answer open so nothing hides behind a click.
  * Desktop reads across each row (number, question, answer); phones stack them.
+ * The footer's "FAQs" link lands on #faqs, at the heading rather than the band's top padding.
  */
 export function ContactFaqs({ faqs }: { faqs: Faq[] }) {
   return (
-    <div className="flex flex-col gap-8 md:gap-12">
+    <div id="faqs" className="flex flex-col gap-8 md:gap-12">
       <div className="flex flex-col gap-3">
         <Eyebrow rule>FAQs</Eyebrow>
         <h2 className="text-h2">
