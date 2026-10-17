@@ -606,8 +606,7 @@ async function main(): Promise<void> {
       update: {},
       create: {
         id: 1,
-        description:
-          'We curate meaningful experiences, from large-scale events to small branding projects, with attention to detail at planning and execution so clients get more than the ask.',
+        description: 'Experiences. Spaces. People. Impact.\nEvery detail designed, built and delivered by one accountable team.',
         phone: '+91 97314 49261',
         whatsapp: '+91 97314 49261',
         email: 'pratyush@brandviserproductions.in',
