@@ -147,7 +147,7 @@ const processSteps = [
 ];
 
 const citiesAnswer =
-  'We work across India. Our teams have run campaigns in over 300 cities, and our print support covers 600 locations across the country at no extra cost.';
+  'We work across India. Our teams have run campaigns in over 400 cities, and our print support covers 600 locations across the country at no extra cost.';
 
 const faqs: Record<'EXPERTISE' | 'CONTACT', Array<[question: string, answer: string]>> = {
   EXPERTISE: [
@@ -588,7 +588,7 @@ async function main(): Promise<void> {
         description:
           'We curate meaningful experiences, from large-scale events to small branding projects, with attention to detail at planning and execution so clients get more than the ask.',
         phone: '+91 97314 49261',
-        whatsapp: '[WhatsApp number]',
+        whatsapp: '+91 97314 49261',
         email: 'info@firefoxproductions.in',
         address,
         hours: '[Opening hours]',

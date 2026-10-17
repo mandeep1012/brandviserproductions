@@ -1,23 +1,39 @@
 import type { SiteInfo } from '@brandviserproductions/contracts';
 import { Button } from '@/components/ui/button';
-import { hasValue, mailHref, telHref, whatsappHref } from '@/lib/contact-links';
+import { hasValue, mailHref, sameNumber, telHref, whatsappHref } from '@/lib/contact-links';
 
-/** Phone, WhatsApp and email as links. Unconfirmed (placeholder) lines are left out rather than shown. */
+/**
+ * Phone, WhatsApp and email as links. When WhatsApp is the same number as the phone, the two share one
+ * line ("+91 … · Call or WhatsApp"). Unconfirmed (placeholder) lines are left out rather than shown.
+ */
 export function DirectLines({ site }: { site: SiteInfo }) {
-  const lines = [
-    { key: 'phone', value: site.phone, href: telHref(site.phone), label: site.phone },
-    { key: 'whatsapp', value: site.whatsapp, href: whatsappHref(site.whatsapp), label: `WhatsApp ${site.whatsapp}` },
-    { key: 'email', value: site.email, href: mailHref(site.email), label: site.email },
-  ].filter((line) => hasValue(line.value));
-  if (lines.length === 0) return null;
+  const hasPhone = hasValue(site.phone);
+  const hasWhatsapp = hasValue(site.whatsapp);
+  const shared = hasPhone && hasWhatsapp && sameNumber(site.phone, site.whatsapp);
+  if (!hasPhone && !hasWhatsapp && !hasValue(site.email)) return null;
   return (
     <div className="border-t border-rule pt-5">
       <p className="eyebrow mb-2 text-slate">Direct lines</p>
-      {lines.map((line) => (
-        <p key={line.key}>
-          <a href={line.href}>{line.label}</a>
+      {hasPhone && (
+        <p>
+          <a href={telHref(site.phone)}>{site.phone}</a>
+          {shared && (
+            <span className="text-small text-slate">
+              {' · '}Call or <a href={whatsappHref(site.whatsapp)}>WhatsApp</a>
+            </span>
+          )}
         </p>
-      ))}
+      )}
+      {hasWhatsapp && !shared && (
+        <p>
+          <a href={whatsappHref(site.whatsapp)}>WhatsApp {site.whatsapp}</a>
+        </p>
+      )}
+      {hasValue(site.email) && (
+        <p>
+          <a href={mailHref(site.email)}>{site.email}</a>
+        </p>
+      )}
     </div>
   );
 }

@@ -8,6 +8,9 @@ export const mailHref = (email: string) => `mailto:${email}`;
 /** Placeholder values from the seed are bracketed; don't turn those into dead links. */
 export const isPlaceholder = (value: string) => /^\[.*\]$/.test(value.trim());
 
+/** True when two display numbers are the same line, e.g. a WhatsApp number that is also the phone number. */
+export const sameNumber = (a: string, b: string) => digits(a) !== '' && digits(a) === digits(b);
+
 /** True for a real, confirmed value: not empty and not a bracketed placeholder. Use it to hide unconfirmed content. */
 export const hasValue = (value: string | null | undefined): value is string =>
   typeof value === 'string' && value.trim() !== '' && !isPlaceholder(value);

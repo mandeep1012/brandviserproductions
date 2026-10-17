@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import { ClientLogos } from '@/components/common/ClientLogos';
 import { Eyebrow } from '@/components/common/Eyebrow';
@@ -9,11 +10,11 @@ import { TestimonialCompany } from '@/components/common/Testimonials';
 import { DirectLines, NextSteps, Office, QuickContactButtons } from '@/components/contact/ContactDetails';
 import { EnquiryForm } from '@/components/contact/EnquiryForm';
 import { MapLink } from '@/components/contact/MapLink';
-import { SchedulerButton } from '@/components/contact/SchedulerButton';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { api, optional } from '@/lib/api/server';
 import { hasValue } from '@/lib/contact-links';
+import { ENQUIRY_HREF } from '@/lib/navigation';
 
 export const revalidate = 300;
 
@@ -21,6 +22,19 @@ export const metadata: Metadata = {
   title: 'Contact & Booking',
   description: 'Tell us about your event. We reply within one working day.',
 };
+
+const CONTACT_LOGOS = ['HDFC Bank', 'Visa', 'BMW Motorrad', 'Uber', 'Gates Foundation'];
+
+/** The FAQ ("Before you write") stays hidden until BRANDVISER confirms its questions and answers. */
+const SHOW_FAQS = false;
+
+function CallBackButton() {
+  return (
+    <Button asChild variant="outline">
+      <Link href={ENQUIRY_HREF}>Request a call back</Link>
+    </Button>
+  );
+}
 
 export default async function ContactPage() {
   const [site, services, faqs, testimonials] = await Promise.all([
@@ -32,6 +46,9 @@ export default async function ContactPage() {
   const quote = testimonials?.[0];
   // Only questions with a confirmed answer are shown; placeholder answers stay hidden until filled in.
   const answeredFaqs = faqs?.filter((faq) => hasValue(faq.answer)) ?? [];
+  // The five logos beside the form, in this order; falls back to the first five if the names ever change.
+  const picked = CONTACT_LOGOS.flatMap((name) => site?.clientLogos.filter((logo) => logo.name === name) ?? []);
+  const contactLogos = picked.length > 0 ? picked : (site?.clientLogos ?? []);
 
   return (
     <>
@@ -49,7 +66,7 @@ export default async function ContactPage() {
             <NextSteps variant="compact" />
             {(site?.clientLogos.length || quote) && (
               <div className="border-t border-rule pt-5">
-                {site && <ClientLogos logos={site.clientLogos} columns={4} className="grid-cols-4 gap-3 md:gap-3 [&>li]:h-11" />}
+                {site && <ClientLogos logos={contactLogos} columns={5} className="grid-cols-5 gap-2 md:gap-2 [&>li]:h-11" />}
                 {quote && (
                   <figure className="mt-4 flex flex-col gap-3">
                     <blockquote className="text-small text-slate">“{quote.quote}”</blockquote>
@@ -89,7 +106,7 @@ export default async function ContactPage() {
                 Open in Maps
               </a>
             </Button>
-            <SchedulerButton label="Book a 30-minute call" />
+            <CallBackButton />
           </Section>
         )}
       </div>
@@ -97,11 +114,8 @@ export default async function ContactPage() {
       {/* Desktop: booking band and map */}
       <div className="hidden lg:block">
         <Section tone="white" spacing="compact" id="book-desktop" className="flex items-center justify-between">
-          <div>
-            <h2 className="text-h2">Prefer to talk?</h2>
-            <p className="text-small mt-3 text-slate">Pick a 30-minute slot that suits you.</p>
-          </div>
-          <SchedulerButton />
+          <h2 className="text-h2">Prefer to talk?</h2>
+          <CallBackButton />
         </Section>
         {site && (
           <Section spacing="compact">
@@ -110,7 +124,7 @@ export default async function ContactPage() {
         )}
       </div>
 
-      {answeredFaqs.length > 0 && (
+      {SHOW_FAQS && answeredFaqs.length > 0 && (
         <Section className="lg:pt-8">
           <SectionHeading title="Before you write" className="md:mb-10" />
           <FaqList faqs={answeredFaqs} />

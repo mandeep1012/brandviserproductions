@@ -4,13 +4,13 @@ import type { ClientLogo } from '@brandviserproductions/contracts';
 import { cn } from '@/lib/utils';
 
 /** Grid of client logos; a labelled placeholder stands in for logos not uploaded yet. */
-export function ClientLogos({ logos, columns = 6, className }: { logos: ClientLogo[]; columns?: 4 | 6; className?: string }) {
+export function ClientLogos({ logos, columns = 6, className }: { logos: ClientLogo[]; columns?: 4 | 5 | 6; className?: string }) {
   if (logos.length === 0) return null;
   return (
     <ul
       className={cn(
         'grid grid-cols-3 gap-3 md:gap-6',
-        columns === 6 ? 'md:grid-cols-6' : 'md:grid-cols-4',
+        { 4: 'md:grid-cols-4', 5: 'md:grid-cols-5', 6: 'md:grid-cols-6' }[columns],
         className,
       )}
     >
