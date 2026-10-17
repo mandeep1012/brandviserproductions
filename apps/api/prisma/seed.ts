@@ -589,7 +589,7 @@ async function main(): Promise<void> {
           'We curate meaningful experiences, from large-scale events to small branding projects, with attention to detail at planning and execution so clients get more than the ask.',
         phone: '+91 97314 49261',
         whatsapp: '+91 97314 49261',
-        email: 'info@firefoxproductions.in',
+        email: 'pratyush@brandviserproductions.in',
         address,
         hours: '[Opening hours]',
         mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`,
