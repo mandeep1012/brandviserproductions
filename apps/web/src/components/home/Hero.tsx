@@ -15,7 +15,7 @@ export function Hero({ stats, imageUrl }: { stats: SiteStats | null; imageUrl: s
           <div className="flex flex-col justify-center gap-4 lg:col-span-7 lg:gap-6 lg:pr-12">
             <Eyebrow rule>360° event &amp; brand activation agency</Eyebrow>
             <h1 className="text-display">
-              Brand stories, staged in <em className="text-metal">every city</em> you sell in.
+              Designing experiences with purpose, presence and <em className="text-metal">precision.</em>
             </h1>
             <p className="max-w-[520px] text-slate">
               Concept, production, on-ground activation and digital amplification from one accountable team.
