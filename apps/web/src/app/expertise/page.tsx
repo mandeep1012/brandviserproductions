@@ -3,12 +3,12 @@ import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { CtaBand } from '@/components/common/CtaBand';
 import { EventImage } from '@/components/common/EventImage';
 import { Eyebrow } from '@/components/common/Eyebrow';
-import { ProcessStrip } from '@/components/common/ProcessSteps';
 import { Section } from '@/components/common/Section';
 import { SectionHeading } from '@/components/common/SectionHeading';
 import { ServiceMatrix } from '@/components/expertise/ServiceMatrix';
 import { ServiceSection } from '@/components/expertise/ServiceSection';
 import { ServiceSubnav } from '@/components/expertise/ServiceSubnav';
+import { WhyBrandviser } from '@/components/expertise/WhyBrandviser';
 import { api, optional } from '@/lib/api/server';
 import { ENQUIRY_HREF } from '@/lib/navigation';
 
@@ -21,11 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ExpertisePage() {
-  const [services, matrix, steps] = await Promise.all([
-    api.services(),
-    optional(api.serviceMatrix()),
-    api.processSteps(),
-  ]);
+  const [services, matrix] = await Promise.all([api.services(), optional(api.serviceMatrix())]);
   const collage = services.slice(0, 3);
 
   return (
@@ -79,8 +75,9 @@ export default async function ExpertisePage() {
         </Section>
       )}
 
-      <Section tone="white" spacing="compact">
-        <ProcessStrip steps={steps} />
+      <Section tone="white">
+        <SectionHeading title="Why BRANDVISER" className="md:mb-10" />
+        <WhyBrandviser />
       </Section>
 
       <CtaBand
