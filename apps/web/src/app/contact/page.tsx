@@ -6,9 +6,9 @@ import { Eyebrow } from '@/components/common/Eyebrow';
 import { FaqList } from '@/components/common/FaqList';
 import { Section } from '@/components/common/Section';
 import { SectionHeading } from '@/components/common/SectionHeading';
-import { TestimonialCompany } from '@/components/common/Testimonials';
 import { DirectLines, NextSteps, Office, QuickContactButtons } from '@/components/contact/ContactDetails';
 import { EnquiryForm } from '@/components/contact/EnquiryForm';
+import { GlobalPresence } from '@/components/contact/GlobalPresence';
 import { MapLink } from '@/components/contact/MapLink';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -37,13 +37,18 @@ function CallBackButton() {
 }
 
 export default async function ContactPage() {
-  const [site, services, faqs, testimonials] = await Promise.all([
+  const [site, services, faqs] = await Promise.all([
     optional(api.site()),
     api.services(),
     optional(api.faqs('CONTACT')),
-    optional(api.testimonials({ featured: true, limit: 1 })),
   ]);
-  const quote = testimonials?.[0];
+  // Company-wide numbers from the site settings (as on the home page); one the API doesn't send yet is left out.
+  const highlights = [
+    { value: site?.stats.clientBrands, label: 'brands' },
+    { value: site?.stats.eventsDelivered, label: 'projects' },
+    { value: site?.stats.citiesCovered, label: 'cities' },
+    { value: site?.stats.countriesCovered, label: 'countries' },
+  ].filter((item): item is { value: number; label: string } => typeof item.value === 'number');
   // Only questions with a confirmed answer are shown; placeholder answers stay hidden until filled in.
   const answeredFaqs = faqs?.filter((faq) => hasValue(faq.answer)) ?? [];
   // The five logos beside the form, in this order; falls back to the first five if the names ever change.
@@ -64,19 +69,28 @@ export default async function ContactPage() {
             {site && <DirectLines site={site} />}
             {site && <Office site={site} />}
             <NextSteps variant="compact" />
-            {(site?.clientLogos.length || quote) && (
-              <div className="border-t border-rule pt-5">
-                {site && <ClientLogos logos={contactLogos} columns={5} className="grid-cols-5 gap-2 md:gap-2 [&>li]:h-11" />}
-                {quote && (
-                  <figure className="mt-4 flex flex-col gap-3">
-                    <blockquote className="text-small text-slate">“{quote.quote}”</blockquote>
-                    <figcaption>
-                      <TestimonialCompany company={quote.company} logos={site?.clientLogos ?? []} className="h-7 w-28" />
-                    </figcaption>
-                  </figure>
-                )}
-              </div>
-            )}
+            <div className="border-t border-rule pt-5">
+              {contactLogos.length > 0 && (
+                <ClientLogos logos={contactLogos} columns={5} className="grid-cols-5 gap-2 md:gap-2 [&>li]:h-11" />
+              )}
+              {/* An excerpt from Truefitt & Hill's testimonial, set as a pull quote. */}
+              <figure className="mt-10 flex flex-col gap-3 border-l-2 border-gold-500 pl-5">
+                <blockquote className="font-serif text-2xl leading-8 text-navy">
+                  “Their professionalism and attention to detail are exceptional.”
+                </blockquote>
+                <figcaption className="eyebrow text-slate">Truefitt &amp; Hill, London</figcaption>
+              </figure>
+              {highlights.length > 0 && (
+                <p className="mt-10 flex flex-wrap gap-x-2 gap-y-1 border-t border-rule pt-5 text-[15px] text-slate">
+                  {highlights.map((item, index) => (
+                    <span key={item.label}>
+                      {index > 0 && <span aria-hidden className="mr-2 text-gold-500">·</span>}
+                      <span className="font-semibold text-navy">{item.value.toLocaleString('en-IN')}+</span> {item.label}
+                    </span>
+                  ))}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -89,6 +103,10 @@ export default async function ContactPage() {
           </Suspense>
         </div>
       </section>
+
+      <Section spacing="compact" className="lg:pt-0">
+        <GlobalPresence />
+      </Section>
 
       {/* Mobile: next steps, office and booking below the form */}
       <div className="lg:hidden">
