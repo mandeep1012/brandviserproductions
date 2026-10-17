@@ -38,9 +38,19 @@ export default async function ExpertisePage() {
           <h1 className="text-h1">
             One team, from first idea to <em className="text-metal">final teardown.</em>
           </h1>
-          <p className="max-w-[560px]">
-            Four practices under one roof, so your event has one plan, one budget and one point of contact.
-          </p>
+          <div className="flex max-w-[560px] flex-col gap-3">
+            <p>
+              Today, we stand as a premier partner for brands that demand more than “standard.” We are a collective of
+              strategists, designers, and production specialists dedicated to the art of the extraordinary.
+            </p>
+            <p>
+              We specialize in a dual-focus approach that combines high-precision print craftsmanship with world-class
+              event production, from MICE and bespoke international retreats to large-scale BTL activations. With a
+              pan-India presence, we deliver end-to-end campaigns across apartment communities, malls and roadshows,
+              managing everything from individual activations to large-scale, multi-city rollouts with consistency and
+              precision.
+            </p>
+          </div>
         </div>
         <div className="grid h-50 grid-cols-[2fr_1fr] grid-rows-2 gap-3 md:col-span-5 md:h-80">
           {collage.map((service, index) => (
