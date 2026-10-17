@@ -3,10 +3,9 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { ClientLogos } from '@/components/common/ClientLogos';
 import { Eyebrow } from '@/components/common/Eyebrow';
-import { FaqList } from '@/components/common/FaqList';
 import { Section } from '@/components/common/Section';
-import { SectionHeading } from '@/components/common/SectionHeading';
 import { DirectLines, NextSteps, Office, QuickContactButtons } from '@/components/contact/ContactDetails';
+import { ContactFaqs } from '@/components/contact/ContactFaqs';
 import { EnquiryForm } from '@/components/contact/EnquiryForm';
 import { GlobalPresence } from '@/components/contact/GlobalPresence';
 import { MapLink } from '@/components/contact/MapLink';
@@ -24,9 +23,6 @@ export const metadata: Metadata = {
 };
 
 const CONTACT_LOGOS = ['HDFC Bank', 'Visa', 'BMW Motorrad', 'Uber', 'Gates Foundation'];
-
-/** The FAQ ("Before you write") stays hidden until BRANDVISER confirms its questions and answers. */
-const SHOW_FAQS = false;
 
 function CallBackButton() {
   return (
@@ -108,6 +104,12 @@ export default async function ContactPage() {
         <GlobalPresence />
       </Section>
 
+      {answeredFaqs.length > 0 && (
+        <Section className="border-t border-rule">
+          <ContactFaqs faqs={answeredFaqs} />
+        </Section>
+      )}
+
       {/* Mobile: next steps, office and booking below the form */}
       <div className="lg:hidden">
         <Section spacing="compact">
@@ -141,13 +143,6 @@ export default async function ContactPage() {
           </Section>
         )}
       </div>
-
-      {SHOW_FAQS && answeredFaqs.length > 0 && (
-        <Section className="lg:pt-8">
-          <SectionHeading title="Before you write" className="md:mb-10" />
-          <FaqList faqs={answeredFaqs} />
-        </Section>
-      )}
     </>
   );
 }

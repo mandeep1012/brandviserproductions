@@ -158,11 +158,32 @@ const faqs: Record<'EXPERTISE' | 'CONTACT', Array<[question: string, answer: str
     ['How is the budget structured?', '[Answer]'],
     ['What do we receive after the event?', '[Answer]'],
   ],
+  // Confirmed by BRANDVISER (October 2026).
   CONTACT: [
-    ['How much lead time do you need?', '[Answer]'],
-    ['Which cities do you cover?', citiesAnswer],
-    ['Is there a minimum budget?', '[Answer]'],
-    ['What are your payment terms?', '[Answer]'],
+    [
+      'Do you handle everything end to end, from concept to on-ground execution?',
+      'Absolutely. From concept creation and design to planning, manpower, and on-ground execution, we manage every detail end to end. Our disciplined team works like your on-site concierge, ensuring a seamless experience so you can relax and focus on what matters most.',
+    ],
+    [
+      'Can you run multi-city rollouts at the same time?',
+      'Yes. We orchestrate multi-city launches, brand expansion, and large-scale activation rollouts simultaneously, delivering consistent brand experiences, seamless coordination, and precision-led execution across every market.',
+    ],
+    [
+      'Do you manage international travel, visas and destination logistics?',
+      'Absolutely. We manage end-to-end international travel, visa coordination, luxury accommodations, transfers, and destination logistics, ensuring every detail is seamlessly orchestrated for a smooth, stress-free experience across borders.',
+    ],
+    [
+      'Which cities do you cover?',
+      'We have a pan-India execution network spanning 400+ cities, covering all major Tier 1 markets alongside a strong presence across Tier 2 and Tier 3 cities. Wherever your brand needs to be, we bring local expertise, seamless coordination, and consistent execution.',
+    ],
+    [
+      'Do you have your own printing unit?',
+      'Yes. Our in-house printing capabilities ensure precision, consistency, and quality across all event collaterals and branding materials, with meticulous quality control checks at every stage.',
+    ],
+    [
+      'How do you make sure everything runs smoothly on the day?',
+      'Through meticulous planning, detailed run sheets, proactive coordination, and real-time on-ground management, we stay ahead of every detail. Our experienced team anticipates challenges, resolves them swiftly, and ensures every moment unfolds seamlessly, just as envisioned.',
+    ],
   ],
 };
 
