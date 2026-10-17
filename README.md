@@ -79,7 +79,7 @@ All routes are under `/api/v1`. Public GETs are CDN-cacheable; everything else i
 | --- | --- | --- |
 | GET | `/site` | Contact details, headline stats (null = not confirmed, hidden), client logos |
 | GET | `/services` · `/services/matrix` | Four practices with deliverables; event-type × service matrix |
-| GET | `/process-steps` | Meet & Agree → Execute & Report |
+| GET | `/process-steps` | Insight → Imagination → Orchestration → Impact |
 | GET | `/case-studies?type&service&city&year&featured&page&limit` | `{items,total,page,pageCount,limit}` |
 | GET | `/case-studies/facets` · `/case-studies/slugs` · `/case-studies/:slug` | Filter options and counts; sitemap; detail page |
 | GET | `/testimonials?featured&limit` · `/team` · `/faqs?page=expertise\|contact` | |

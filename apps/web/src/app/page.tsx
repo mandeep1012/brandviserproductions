@@ -44,10 +44,13 @@ export default async function HomePage() {
       <Section tone="midnight">
         <SectionHeading
           eyebrow="How we work"
-          title="Four steps, one point of contact."
+          title="From first call to final bow."
           className="md:mb-14"
         />
         <ProcessStepsCompact steps={steps} />
+        <p className="mt-10 border-l-2 border-gold-500 pl-5 font-serif text-2xl leading-8 italic md:mt-16 md:text-[30px] md:leading-[38px]">
+          One team. One point of contact. No surprises on the day.
+        </p>
       </Section>
 
       {featuredStudies.length > 0 && (
