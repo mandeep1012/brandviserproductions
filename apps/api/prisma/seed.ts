@@ -118,36 +118,36 @@ const matrix: Record<EventType, string[]> = {
 const processSteps = [
   {
     number: '01',
-    name: 'Meet & Agree',
-    line: 'We take the brief, agree goals, budget and dates.',
-    detail: 'We take the brief in person or on a call and agree goals, audience, budget range and dates.',
+    name: 'Insight',
+    line: 'The brief, the audience, the budget and the one number that defines success.',
+    detail: 'The brief, the audience, the budget and the one number that defines success.',
     deliverable: 'Signed-off brief',
   },
   {
     number: '02',
-    name: 'Idea & Concept',
-    line: 'A concept deck with theme, flow and references.',
-    detail: 'The creative team develops a theme, show flow and references that answer the brief.',
+    name: 'Imagination',
+    line: 'Concept, design, 3D renders and a fully costed plan.',
+    detail: 'Concept, design, 3D renders and a fully costed plan.',
     deliverable: 'Concept deck',
   },
   {
     number: '03',
-    name: 'Design & Create',
-    line: 'Designs, costing and a timeline for sign-off.',
-    detail: 'Stage and collateral designs, an itemised costing and a day-by-day timeline, signed off before anything is built.',
+    name: 'Orchestration',
+    line: 'Venues, vendors, fabrication, talent and full rehearsals.',
+    detail: 'Venues, vendors, fabrication, talent and full rehearsals.',
     deliverable: 'Designs and budget',
   },
   {
     number: '04',
-    name: 'Build & Execute',
-    line: 'Fabrication, on-ground delivery, then a wrap-up report.',
-    detail: 'We build the set and run the event on the ground, then report on attendance, reach and learnings.',
+    name: 'Impact',
+    line: 'An experience that feels effortless in the moment and memorable long after.',
+    detail: 'An experience that feels effortless in the moment and memorable long after.',
     deliverable: 'Event and report',
   },
 ];
 
 const citiesAnswer =
-  'We work across India. Our teams have run campaigns in over 300 cities, and our print support covers 600 locations across the country at no extra cost.';
+  'We work across India. Our teams have run campaigns in over 400 cities, and our print support covers 600 locations across the country at no extra cost.';
 
 const faqs: Record<'EXPERTISE' | 'CONTACT', Array<[question: string, answer: string]>> = {
   EXPERTISE: [
@@ -158,11 +158,32 @@ const faqs: Record<'EXPERTISE' | 'CONTACT', Array<[question: string, answer: str
     ['How is the budget structured?', '[Answer]'],
     ['What do we receive after the event?', '[Answer]'],
   ],
+  // Confirmed by BRANDVISER (October 2026).
   CONTACT: [
-    ['How much lead time do you need?', '[Answer]'],
-    ['Which cities do you cover?', citiesAnswer],
-    ['Is there a minimum budget?', '[Answer]'],
-    ['What are your payment terms?', '[Answer]'],
+    [
+      'Do you handle everything end to end, from concept to on-ground execution?',
+      'Absolutely. From concept creation and design to planning, manpower, and on-ground execution, we manage every detail end to end. Our disciplined team works like your on-site concierge, ensuring a seamless experience so you can relax and focus on what matters most.',
+    ],
+    [
+      'Can you run multi-city rollouts at the same time?',
+      'Yes. We orchestrate multi-city launches, brand expansion, and large-scale activation rollouts simultaneously, delivering consistent brand experiences, seamless coordination, and precision-led execution across every market.',
+    ],
+    [
+      'Do you manage international travel, visas and destination logistics?',
+      'Absolutely. We manage end-to-end international travel, visa coordination, luxury accommodations, transfers, and destination logistics, ensuring every detail is seamlessly orchestrated for a smooth, stress-free experience across borders.',
+    ],
+    [
+      'Which cities do you cover?',
+      'We have a pan-India execution network spanning 400+ cities, covering all major Tier 1 markets alongside a strong presence across Tier 2 and Tier 3 cities. Wherever your brand needs to be, we bring local expertise, seamless coordination, and consistent execution.',
+    ],
+    [
+      'Do you have your own printing unit?',
+      'Yes. Our in-house printing capabilities ensure precision, consistency, and quality across all event collaterals and branding materials, with meticulous quality control checks at every stage.',
+    ],
+    [
+      'How do you make sure everything runs smoothly on the day?',
+      'Through meticulous planning, detailed run sheets, proactive coordination, and real-time on-ground management, we stay ahead of every detail. Our experienced team anticipates challenges, resolves them swiftly, and ensures every moment unfolds seamlessly, just as envisioned.',
+    ],
   ],
 };
 
@@ -495,7 +516,7 @@ const testimonials = [
   {
     company: 'HSBC',
     quote:
-      'BRANDVISER is team of young enthusiastic people. They offer service in good budget and their pro activeness throughout the event is amazing. The team is helpful and genuine puts in lot of efforts in every event we do.',
+      'BRANDVISER is a team of young enthusiastic people. They offer service in good budget and their pro activeness throughout the event is amazing. The team is helpful and genuine puts in lot of efforts in every event we do.',
     isFeatured: true,
   },
   {
@@ -538,41 +559,35 @@ const team = [
  * colour logos (Logicserve is now LS Digital). Paths are under apps/web/public.
  */
 const clientLogos: Array<[name: string, path: string]> = [
-  ['HDFC Bank', '/clients/hdfc-bank.svg'],
-  ['Visa', '/clients/visa.svg'],
-  ['BMW Motorrad', '/clients/bmw-motorrad.svg'],
-  ['Uber', '/clients/uber.svg'],
-  ['Tata 1mg', '/clients/tata-1mg.png'],
-  ['Gates Foundation', '/clients/gates-foundation.svg'],
-  ['Ola', '/clients/ola.svg'],
-  ['Groww', '/clients/groww.png'],
-  ['Mirae Asset', '/clients/mirae-asset.svg'],
-  ['CoinDCX', '/clients/coindcx.svg'],
-  ['Porter', '/clients/porter.svg'],
-  ['Swish', '/clients/swish.png'],
-  ['Royal Oak', '/clients/royal-oak.png'],
-  ['Truefitt & Hill', '/clients/truefitt-hill.png'],
-  ['Bodycraft', '/clients/bodycraft.svg'],
-  ['L&T Mutual Fund', '/clients/lt-mutual-fund.png'],
-  ['Shriram Properties', '/clients/shriram-properties.png'],
-  ['IIIT Bangalore', '/clients/iiit-bangalore.svg'],
-  ['HSBC', '/clients/hsbc.svg'],
-  ['Swiggy', '/clients/swiggy.png'],
-  ['Fischer', '/clients/fischer.png'],
-  ['Google', '/clients/google.svg'],
-  ['American Express', '/clients/american-express.svg'],
-  ['Harley-Davidson', '/clients/harley-davidson.svg'],
-  ['Grofers', '/clients/grofers.svg'],
-  ['Udaan', '/clients/udaan.png'],
-  ['VLCC', '/clients/vlcc.png'],
-  ['Cuemath', '/clients/cuemath.png'],
-  ['FreshMenu', '/clients/freshmenu.png'],
-  ['NestAway', '/clients/nestaway.png'],
-  ['Shadowfax', '/clients/shadowfax.png'],
-  ['IIFL', '/clients/iifl.png'],
-  ['Hyperconnect', '/clients/hyperconnect.png'],
-  ['LS Digital', '/clients/ls-digital.png'],
-  ['Sanjay Ghodawat Group', '/clients/sanjay-ghodawat-group.png'],
+  ['HDFC Bank', '/client-logos/hdfc-bank.svg'],
+  ['Visa', '/client-logos/visa.svg'],
+  ['BMW Motorrad', '/client-logos/bmw-motorrad.svg'],
+  ['Uber', '/client-logos/uber.svg'],
+  ['Tata 1mg', '/client-logos/tata-1mg.png'],
+  ['Gates Foundation', '/client-logos/gates-foundation.svg'],
+  ['Ola', '/client-logos/ola.svg'],
+  ['Groww', '/client-logos/groww.png'],
+  ['Mirae Asset', '/client-logos/mirae-asset.svg'],
+  ['CoinDCX', '/client-logos/coindcx.svg'],
+  ['Porter', '/client-logos/porter.svg'],
+  ['Swish', '/client-logos/swish.png'],
+  ['Royal Oak', '/client-logos/royal-oak.png'],
+  ['Truefitt & Hill', '/client-logos/truefitt-hill.png'],
+  ['Bodycraft', '/client-logos/bodycraft.svg'],
+  ['L&T Mutual Fund', '/client-logos/lt-mutual-fund.png'],
+  ['Shriram Properties', '/client-logos/shriram-properties.png'],
+  ['IIIT Bangalore', '/client-logos/iiit-bangalore.svg'],
+  ['HSBC', '/client-logos/hsbc.svg'],
+  ['Swiggy', '/client-logos/swiggy.png'],
+  ['Fischer', '/client-logos/fischer.png'],
+  ['Google', '/client-logos/google.svg'],
+  ['American Express', '/client-logos/american-express.svg'],
+  ['Harley-Davidson', '/client-logos/harley-davidson.svg'],
+  ['Udaan', '/client-logos/udaan.png'],
+  ['VLCC', '/client-logos/vlcc.png'],
+  ['Shadowfax', '/client-logos/shadowfax.png'],
+  ['IIFL', '/client-logos/iifl.png'],
+  ['Sanjay Ghodawat Group', '/client-logos/sanjay-ghodawat-group.png'],
 ];
 
 const address = '#404, 1st Floor, 17th C Main Road, KHB Colony, Koramangala 5th Block, Bengaluru 560095';
@@ -585,20 +600,20 @@ async function main(): Promise<void> {
       update: {},
       create: {
         id: 1,
-        description:
-          'We curate meaningful experiences, from large-scale events to small branding projects, with attention to detail at planning and execution so clients get more than the ask.',
+        description: 'Experiences. Spaces. People. Impact.\nEvery detail designed, built and delivered by one accountable team.',
         phone: '+91 97314 49261',
-        whatsapp: '[WhatsApp number]',
-        email: 'info@firefoxproductions.in',
+        whatsapp: '+91 97314 49261',
+        email: 'pratyush@brandviserproductions.in',
         address,
         hours: '[Opening hours]',
         mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`,
         mapImageUrl: null,
         // Only stats BRANDVISER has published; the site hides empty ones.
-        citiesCovered: 300,
-        clientBrands: 50,
-        eventsDelivered: null,
+        citiesCovered: 400,
+        clientBrands: 75,
+        eventsDelivered: 1000,
         yearsExperience: null,
+        countriesCovered: 15,
       },
     });
 

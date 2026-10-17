@@ -38,6 +38,7 @@ export interface SiteStats {
   clientBrands: number | null;
   eventsDelivered: number | null;
   yearsExperience: number | null;
+  countriesCovered: number | null;
 }
 
 export interface ClientLogo {

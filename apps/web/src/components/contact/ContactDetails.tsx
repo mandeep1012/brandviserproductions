@@ -1,28 +1,39 @@
 import type { SiteInfo } from '@brandviserproductions/contracts';
 import { Button } from '@/components/ui/button';
-import { isPlaceholder, mailHref, telHref, whatsappHref } from '@/lib/contact-links';
+import { hasValue, mailHref, sameNumber, telHref, whatsappHref } from '@/lib/contact-links';
 
-/** Shows a placeholder as plain text and a real value as a link. */
-function MaybeLink({ value, href, children }: { value: string; href: string; children?: React.ReactNode }) {
-  if (isPlaceholder(value)) return <span>{children ?? value}</span>;
-  return <a href={href}>{children ?? value}</a>;
-}
-
+/**
+ * Phone, WhatsApp and email as links. When WhatsApp is the same number as the phone, the two share one
+ * line ("+91 … · Call or WhatsApp"). Unconfirmed (placeholder) lines are left out rather than shown.
+ */
 export function DirectLines({ site }: { site: SiteInfo }) {
+  const hasPhone = hasValue(site.phone);
+  const hasWhatsapp = hasValue(site.whatsapp);
+  const shared = hasPhone && hasWhatsapp && sameNumber(site.phone, site.whatsapp);
+  if (!hasPhone && !hasWhatsapp && !hasValue(site.email)) return null;
   return (
     <div className="border-t border-rule pt-5">
       <p className="eyebrow mb-2 text-slate">Direct lines</p>
-      <p>
-        <MaybeLink value={site.phone} href={telHref(site.phone)} />
-      </p>
-      <p>
-        <MaybeLink value={site.whatsapp} href={whatsappHref(site.whatsapp)}>
-          WhatsApp {site.whatsapp}
-        </MaybeLink>
-      </p>
-      <p>
-        <MaybeLink value={site.email} href={mailHref(site.email)} />
-      </p>
+      {hasPhone && (
+        <p>
+          <a href={telHref(site.phone)}>{site.phone}</a>
+          {shared && (
+            <span className="text-small text-slate">
+              {' · '}Call or <a href={whatsappHref(site.whatsapp)}>WhatsApp</a>
+            </span>
+          )}
+        </p>
+      )}
+      {hasWhatsapp && !shared && (
+        <p>
+          <a href={whatsappHref(site.whatsapp)}>WhatsApp {site.whatsapp}</a>
+        </p>
+      )}
+      {hasValue(site.email) && (
+        <p>
+          <a href={mailHref(site.email)}>{site.email}</a>
+        </p>
+      )}
     </div>
   );
 }
@@ -32,7 +43,7 @@ export function Office({ site }: { site: SiteInfo }) {
     <div className="border-t border-rule pt-5">
       <p className="eyebrow mb-2 text-slate">Office</p>
       <address className="not-italic">{site.address}</address>
-      <p className="text-small text-slate">{site.hours}</p>
+      {hasValue(site.hours) && <p className="text-small text-slate">{site.hours}</p>}
     </div>
   );
 }
@@ -43,7 +54,7 @@ export function QuickContactButtons({ site }: { site: SiteInfo }) {
     { label: 'Call', href: telHref(site.phone), value: site.phone },
     { label: 'WhatsApp', href: whatsappHref(site.whatsapp), value: site.whatsapp },
     { label: 'Email', href: mailHref(site.email), value: site.email },
-  ].filter((item) => !isPlaceholder(item.value));
+  ].filter((item) => hasValue(item.value));
   if (items.length === 0) return null;
   return (
     <div className="mt-3 grid grid-cols-3 gap-2 md:hidden">

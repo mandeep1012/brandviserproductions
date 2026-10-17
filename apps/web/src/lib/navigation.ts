@@ -15,6 +15,7 @@ export const COMPANY_NAV: NavItem[] = [
   { href: '/gallery', label: 'Gallery' },
   { href: '/moments', label: 'Moments' },
   { href: '/contact', label: 'Contact' },
+  { href: '/contact#faqs', label: 'FAQs' },
 ];
 
 export const ENQUIRY_HREF = '/contact#enquiry';
