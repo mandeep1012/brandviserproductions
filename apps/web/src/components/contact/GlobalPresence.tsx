@@ -7,10 +7,14 @@ const DESTINATIONS = [
   ['Hong Kong', 'Macao', 'Baku', 'Almaty', 'Türkiye', 'London', 'Mauritius'],
 ];
 
-/** Contact: the world map with BRANDVISER's international destinations lit in gold, named underneath. */
+/**
+ * Contact: the world map with BRANDVISER's international destinations lit in gold, named underneath.
+ * Desktop shows the names in exactly two rows; tablets and phones show a neat grid instead of
+ * wrapped rows (which would start lines with a stray separator).
+ */
 export function GlobalPresence() {
   return (
-    <div className="mx-auto flex max-w-[760px] flex-col items-center gap-6 md:gap-8">
+    <div className="mx-auto flex max-w-[960px] flex-col items-center gap-6 md:gap-8">
       <Eyebrow rule>Global presence</Eyebrow>
       <Image
         src="/contact/global-presence-map.jpg"
@@ -18,16 +22,16 @@ export function GlobalPresence() {
         width={1072}
         height={1011}
         sizes="(min-width: 48rem) 760px, 100vw"
-        className="h-auto w-full rounded-md"
+        className="h-auto w-full max-w-[760px] rounded-md"
       />
-      <div aria-hidden className="h-px w-4/5 bg-gold-500" />
-      <div className="flex flex-col items-center gap-2 text-center text-[15px] text-navy md:text-[17px]">
+      <div aria-hidden className="h-px w-full max-w-[608px] bg-gold-500" />
+      <div className="grid w-full grid-cols-3 gap-x-2 gap-y-2.5 text-center text-[15px] text-navy md:grid-cols-5 md:text-base lg:flex lg:flex-col lg:items-center lg:gap-2 lg:text-[17px]">
         {DESTINATIONS.map((row) => (
-          <ul key={row[0]} className="flex flex-wrap justify-center gap-x-3 gap-y-1">
+          <ul key={row[0]} className="contents lg:flex lg:justify-center lg:gap-x-3">
             {row.map((name, index) => (
-              <li key={name} className="flex items-center gap-3">
+              <li key={name} className="lg:flex lg:items-center lg:gap-3 lg:whitespace-nowrap">
                 {index > 0 && (
-                  <span aria-hidden className="text-gold-500">
+                  <span aria-hidden className="hidden text-gold-500 lg:inline">
                     •
                   </span>
                 )}
