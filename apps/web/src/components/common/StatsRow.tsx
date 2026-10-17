@@ -7,7 +7,7 @@ const LABELS: Record<keyof SiteStats, { long: string; short: string }> = {
   eventsDelivered: { long: 'Projects delivered', short: 'Projects' },
   yearsExperience: { long: 'Years of experience', short: 'Years' },
   // Countries where BRANDVISER has presence and on-ground capability, not only ones already delivered in.
-  countriesCovered: { long: 'Countries with presence', short: 'Countries' },
+  countriesCovered: { long: 'Global presence', short: 'Countries' },
 };
 
 interface StatsRowProps {
