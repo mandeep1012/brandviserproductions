@@ -17,12 +17,18 @@ export function Hero({ stats, imageUrl }: { stats: SiteStats | null; imageUrl: s
             <h1 className="text-display">
               Designing experiences with purpose, presence and <em className="text-metal">precision.</em>
             </h1>
-            <p className="max-w-[520px] text-slate">
-              BRANDVISER is an industry-leading meetings, events and hospitality company. Since 2015, we have helped
-              marketers, HR teams and event planners across India deliver experiences people remember. One team brings
-              venues, vendors, creative and on-ground crews together, so every event runs smoothly and makes a bigger
-              impact.
-            </p>
+            <div className="flex max-w-[520px] flex-col gap-3 text-slate">
+              <p>
+                BRANDVISER Productions is a leading event and experiential marketing company, creating impactful
+                experiences across MICE, conferences, exhibitions, and brand activations. With a strong presence across
+                400+ cities in India and 15+ countries internationally, we bring brands closer to their audiences.
+              </p>
+              <p>
+                Since 2015, our expertise has empowered businesses to connect, engage, and grow through seamless event
+                execution and innovative marketing solutions. From concept to execution, we transform ideas into
+                memorable experiences that inspire engagement and deliver measurable impact.
+              </p>
+            </div>
             <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-4">
               <Button asChild variant="gold">
                 <Link href={ENQUIRY_HREF}>Plan an event</Link>
