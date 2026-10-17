@@ -2,43 +2,43 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-/** The navy and gold "B" from the BRANDVISER logo. Decorative: the wordmark beside it carries the name. */
-export function BrandMark({ className }: { className?: string }) {
+/** Intrinsic size of the logo artwork in /public/brand (4x its largest use on the site). */
+const LOGO_WIDTH = 1200;
+const LOGO_HEIGHT = 248;
+
+/**
+ * The BRANDVISER logo artwork: B mark, BRANDVISER and the gold "Productions Pvt. Ltd." line,
+ * exactly as designed. `tone="dark"` is the same artwork with ivory lettering for navy bands.
+ * Set the height with a class; the width follows. Served at high quality so the lettering stays sharp.
+ */
+export function Wordmark({
+  tone = 'light',
+  priority = false,
+  className,
+}: {
+  tone?: 'light' | 'dark';
+  priority?: boolean;
+  className?: string;
+}) {
   return (
     <Image
-      src="/brand/b-mark-navy-gold.png"
-      alt=""
-      width={246}
-      height={278}
-      className={cn('h-7 w-auto shrink-0 md:h-9', className)}
+      src={tone === 'dark' ? '/brand/brandviser-logo-reversed.png' : '/brand/brandviser-logo.png'}
+      alt="BRANDVISER Productions Pvt. Ltd."
+      width={LOGO_WIDTH}
+      height={LOGO_HEIGHT}
+      quality={90}
+      sizes="320px"
+      priority={priority}
+      className={cn('h-10 w-auto max-w-none shrink-0', className)}
     />
   );
 }
 
-/**
- * The logo lockup: B mark, BRANDVISER in navy (ivory on dark bands) and a gold tracked tagline
- * beneath, as in the logo artwork.
- */
-export function Wordmark({ tagline = 'Productions', className }: { tagline?: string; className?: string }) {
-  return (
-    <span className={cn('flex items-center gap-2.5 md:gap-3', className)}>
-      <BrandMark />
-      <span className="flex flex-col gap-1">
-        <span className="font-serif text-[22px] leading-none tracking-[0.03em] text-heading md:text-[28px]">
-          BRANDVISER
-        </span>
-        <span className="text-[7px] leading-none font-medium tracking-[0.36em] text-gold-700 uppercase md:text-[8px] md:tracking-[0.38em] [.surface-dark_&]:text-gold-300">
-          {tagline}
-        </span>
-      </span>
-    </span>
-  );
-}
-
+/** Header logo, linking home. */
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" aria-label="BRANDVISER Productions, home" className={cn('flex', className)}>
-      <Wordmark />
+    <Link href="/" aria-label="BRANDVISER Productions, home" className={cn('flex shrink-0', className)}>
+      <Wordmark priority className="h-10 sm:h-11 lg:h-12 xl:h-14" />
     </Link>
   );
 }
