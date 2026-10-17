@@ -16,6 +16,7 @@ export function toSiteInfo(settings: SiteSettings, logos: ClientLogo[]): SiteInf
       clientBrands: settings.clientBrands,
       eventsDelivered: settings.eventsDelivered,
       yearsExperience: settings.yearsExperience,
+      countriesCovered: settings.countriesCovered,
     },
     clientLogos: logos.map((logo) => ({ id: logo.id, name: logo.name, logoUrl: logo.logoUrl })),
   };

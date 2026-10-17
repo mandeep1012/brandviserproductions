@@ -49,7 +49,7 @@ export function Hero({ stats, imageUrl }: { stats: SiteStats | null; imageUrl: s
         {stats && (
           <StatsRow
             stats={stats}
-            keys={['citiesCovered', 'clientBrands', 'yearsExperience']}
+            keys={['citiesCovered', 'clientBrands', 'eventsDelivered', 'countriesCovered']}
             metal
             className="mt-8 border-t border-rule pt-4 md:mt-18 md:pt-8"
           />

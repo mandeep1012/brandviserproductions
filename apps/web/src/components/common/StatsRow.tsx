@@ -3,9 +3,10 @@ import { cn } from '@/lib/utils';
 
 const LABELS: Record<keyof SiteStats, { long: string; short: string }> = {
   citiesCovered: { long: 'Cities covered', short: 'Cities' },
-  clientBrands: { long: 'Client brands', short: 'Clients' },
-  eventsDelivered: { long: 'Events delivered', short: 'Events' },
+  clientBrands: { long: 'Brand clients', short: 'Clients' },
+  eventsDelivered: { long: 'Projects delivered', short: 'Projects' },
   yearsExperience: { long: 'Years of experience', short: 'Years' },
+  countriesCovered: { long: 'Countries covered', short: 'Countries' },
 };
 
 interface StatsRowProps {
@@ -21,7 +22,8 @@ interface StatsRowProps {
  * disappears entirely when none are set.
  */
 export function StatsRow({ stats, keys, metal = false, className }: StatsRowProps) {
-  const shown = keys.filter((key) => stats[key] !== null);
+  // `typeof … === 'number'` also skips a stat an older API doesn't send yet (undefined), not just null.
+  const shown = keys.filter((key) => typeof stats[key] === 'number');
   if (shown.length === 0) return null;
   return (
     <dl

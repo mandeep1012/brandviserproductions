@@ -93,7 +93,7 @@ Example: publishing the real stats.
 ```bash
 curl -X PATCH "$API/api/v1/admin/site" -H "Authorization: Bearer $ADMIN_API_TOKEN" \
   -H 'Content-Type: application/json' \
-  -d '{"citiesCovered":300,"clientBrands":80,"eventsDelivered":1200,"yearsExperience":15}'
+  -d '{"citiesCovered":400,"clientBrands":75,"eventsDelivered":1000,"countriesCovered":15}'
 ```
 
 ## Local development

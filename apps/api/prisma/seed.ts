@@ -595,10 +595,11 @@ async function main(): Promise<void> {
         mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`,
         mapImageUrl: null,
         // Only stats BRANDVISER has published; the site hides empty ones.
-        citiesCovered: 300,
-        clientBrands: 50,
-        eventsDelivered: null,
+        citiesCovered: 400,
+        clientBrands: 75,
+        eventsDelivered: 1000,
         yearsExperience: null,
+        countriesCovered: 15,
       },
     });
 
