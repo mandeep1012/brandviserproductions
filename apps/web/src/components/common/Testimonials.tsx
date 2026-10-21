@@ -25,8 +25,8 @@ export function TestimonialCompany({
   const logoUrl = logos.find((logo) => logo.name === company)?.logoUrl;
   if (!logoUrl) return <p className={cn('font-semibold text-heading', className)}>{company}</p>;
   return (
-    <div className={cn('relative h-8 w-32', className)}>
-      <Image src={logoUrl} alt={company} fill sizes="144px" className="object-contain object-left" />
+    <div className={cn('relative h-14 w-48 md:h-16 md:w-56', className)}>
+      <Image src={logoUrl} alt={company} fill sizes="224px" quality={90} className="object-contain object-left" />
     </div>
   );
 }
@@ -86,7 +86,7 @@ export function Testimonials({ testimonials, logos }: { testimonials: Testimonia
               </span>
               <blockquote className="min-h-28">{t.quote}</blockquote>
               <figcaption className="mt-auto border-t border-rule pt-4">
-                <TestimonialCompany company={t.company} logos={logos} className="md:h-9 md:w-36" />
+                <TestimonialCompany company={t.company} logos={logos} />
               </figcaption>
             </figure>
           </li>

@@ -17,24 +17,37 @@ export const metadata: Metadata = {
 const GALLERY_LIMIT = 48;
 
 export default async function GalleryPage() {
-  const [facets, results, featuredList] = await Promise.all([
-    api.caseStudyFacets(),
+  const [results, featuredList, site] = await Promise.all([
     api.caseStudies({ limit: GALLERY_LIMIT }),
     optional(api.caseStudies({ featured: true, limit: 1 })),
+    optional(api.site()),
   ]);
   const featuredSlug = featuredList?.items[0]?.slug;
   const featured = featuredSlug ? await optional(api.caseStudy(featuredSlug)) : null;
+  // Company-wide numbers from the site settings (the same ones as the home page), not a count of the
+  // photos in the gallery. A number the API doesn't send yet is left out.
+  const highlights = [
+    { value: site?.stats.eventsDelivered, label: 'projects delivered' },
+    { value: site?.stats.citiesCovered, label: 'cities' },
+    { value: site?.stats.countriesCovered, label: 'countries' },
+  ].filter((item): item is { value: number; label: string } => typeof item.value === 'number');
 
   return (
     <>
       <section className="gutter flex flex-col gap-3 pt-8 pb-6 md:pt-16 md:pb-12">
         <Eyebrow rule>The gallery</Eyebrow>
         <h1 className="text-h1">
-          Work we have <em className="text-metal">staged.</em>
+          Where ideas took the <em className="text-metal">stage.</em>
         </h1>
-        <p className="text-small text-slate">
-          {facets.totalEvents} events · {facets.totalCities} cities
+        <p className="max-w-[640px]">
+          A curated look at experiences designed, built and delivered, from mall activations to business conference
+          meetups to award nights and retreats abroad. Each one crafted to be remembered.
         </p>
+        {highlights.length > 0 && (
+          <p className="text-small text-slate">
+            {highlights.map((item) => `${item.value.toLocaleString('en-IN')}+ ${item.label}`).join(' · ')}
+          </p>
+        )}
       </section>
 
       {featured && <FeaturedCase study={featured} />}

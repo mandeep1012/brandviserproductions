@@ -63,20 +63,21 @@ enum EnquiryStatus {
 /// Single row (id = 1): contact details and headline stats shown in the header, footer,
 /// home stats row, about stats band and contact page.
 model SiteSettings {
-  id              Int      @id @default(1)
-  description     String   @db.VarChar(280)
-  phone           String   @db.VarChar(40)
-  whatsapp        String   @db.VarChar(40)
-  email           String   @db.VarChar(160)
-  address         String   @db.VarChar(280)
-  hours           String   @db.VarChar(160)
-  mapUrl          String
-  mapImageUrl     String?
-  citiesCovered   Int?
-  clientBrands    Int?
-  eventsDelivered Int?
-  yearsExperience Int?
-  updatedAt       DateTime @updatedAt
+  id               Int      @id @default(1)
+  description      String   @db.VarChar(280)
+  phone            String   @db.VarChar(40)
+  whatsapp         String   @db.VarChar(40)
+  email            String   @db.VarChar(160)
+  address          String   @db.VarChar(280)
+  hours            String   @db.VarChar(160)
+  mapUrl           String
+  mapImageUrl      String?
+  citiesCovered    Int?
+  clientBrands     Int?
+  eventsDelivered  Int?
+  yearsExperience  Int?
+  countriesCovered Int?
+  updatedAt        DateTime @updatedAt
 }
 
 model ClientLogo {

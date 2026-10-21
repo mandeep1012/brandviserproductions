@@ -1,18 +1,19 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import { ClientLogos } from '@/components/common/ClientLogos';
 import { Eyebrow } from '@/components/common/Eyebrow';
-import { FaqList } from '@/components/common/FaqList';
 import { Section } from '@/components/common/Section';
-import { SectionHeading } from '@/components/common/SectionHeading';
-import { TestimonialCompany } from '@/components/common/Testimonials';
 import { DirectLines, NextSteps, Office, QuickContactButtons } from '@/components/contact/ContactDetails';
+import { ContactFaqs } from '@/components/contact/ContactFaqs';
 import { EnquiryForm } from '@/components/contact/EnquiryForm';
+import { GlobalPresence } from '@/components/contact/GlobalPresence';
 import { MapLink } from '@/components/contact/MapLink';
-import { SchedulerButton } from '@/components/contact/SchedulerButton';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { api, optional } from '@/lib/api/server';
+import { hasValue } from '@/lib/contact-links';
+import { ENQUIRY_HREF } from '@/lib/navigation';
 
 export const revalidate = 300;
 
@@ -21,14 +22,34 @@ export const metadata: Metadata = {
   description: 'Tell us about your event. We reply within one working day.',
 };
 
+const CONTACT_LOGOS = ['HDFC Bank', 'Visa', 'BMW Motorrad', 'Uber', 'Gates Foundation'];
+
+function CallBackButton() {
+  return (
+    <Button asChild variant="outline">
+      <Link href={ENQUIRY_HREF}>Request a call back</Link>
+    </Button>
+  );
+}
+
 export default async function ContactPage() {
-  const [site, services, faqs, testimonials] = await Promise.all([
+  const [site, services, faqs] = await Promise.all([
     optional(api.site()),
     api.services(),
     optional(api.faqs('CONTACT')),
-    optional(api.testimonials({ featured: true, limit: 1 })),
   ]);
-  const quote = testimonials?.[0];
+  // Company-wide numbers from the site settings (as on the home page); one the API doesn't send yet is left out.
+  const highlights = [
+    { value: site?.stats.clientBrands, label: 'brands' },
+    { value: site?.stats.eventsDelivered, label: 'projects' },
+    { value: site?.stats.citiesCovered, label: 'cities' },
+    { value: site?.stats.countriesCovered, label: 'countries' },
+  ].filter((item): item is { value: number; label: string } => typeof item.value === 'number');
+  // Only questions with a confirmed answer are shown; placeholder answers stay hidden until filled in.
+  const answeredFaqs = faqs?.filter((faq) => hasValue(faq.answer)) ?? [];
+  // The five logos beside the form, in this order; falls back to the first five if the names ever change.
+  const picked = CONTACT_LOGOS.flatMap((name) => site?.clientLogos.filter((logo) => logo.name === name) ?? []);
+  const contactLogos = picked.length > 0 ? picked : (site?.clientLogos ?? []);
 
   return (
     <>
@@ -44,19 +65,28 @@ export default async function ContactPage() {
             {site && <DirectLines site={site} />}
             {site && <Office site={site} />}
             <NextSteps variant="compact" />
-            {(site?.clientLogos.length || quote) && (
-              <div className="border-t border-rule pt-5">
-                {site && <ClientLogos logos={site.clientLogos} columns={4} className="grid-cols-4 gap-3 md:gap-3 [&>li]:h-11" />}
-                {quote && (
-                  <figure className="mt-4 flex flex-col gap-3">
-                    <blockquote className="text-small text-slate">“{quote.quote}”</blockquote>
-                    <figcaption>
-                      <TestimonialCompany company={quote.company} logos={site?.clientLogos ?? []} className="h-7 w-28" />
-                    </figcaption>
-                  </figure>
-                )}
-              </div>
-            )}
+            <div className="border-t border-rule pt-5">
+              {contactLogos.length > 0 && (
+                <ClientLogos logos={contactLogos} columns={5} className="grid-cols-5 gap-2 md:gap-2 [&>li]:h-11" />
+              )}
+              {/* An excerpt from Truefitt & Hill's testimonial, set as a pull quote. */}
+              <figure className="mt-10 flex flex-col gap-3 border-l-2 border-gold-500 pl-5">
+                <blockquote className="font-serif text-2xl leading-8 text-navy">
+                  “Their professionalism and attention to detail are exceptional.”
+                </blockquote>
+                <figcaption className="eyebrow text-slate">Truefitt &amp; Hill, London</figcaption>
+              </figure>
+              {highlights.length > 0 && (
+                <p className="mt-10 flex flex-wrap gap-x-2 gap-y-1 border-t border-rule pt-5 text-[15px] text-slate">
+                  {highlights.map((item, index) => (
+                    <span key={item.label}>
+                      {index > 0 && <span aria-hidden className="mr-2 text-gold-500">·</span>}
+                      <span className="font-semibold text-navy">{item.value.toLocaleString('en-IN')}+</span> {item.label}
+                    </span>
+                  ))}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -70,6 +100,16 @@ export default async function ContactPage() {
         </div>
       </section>
 
+      <Section spacing="compact" className="lg:pt-0">
+        <GlobalPresence />
+      </Section>
+
+      {answeredFaqs.length > 0 && (
+        <Section className="border-t border-rule">
+          <ContactFaqs faqs={answeredFaqs} />
+        </Section>
+      )}
+
       {/* Mobile: next steps, office and booking below the form */}
       <div className="lg:hidden">
         <Section spacing="compact">
@@ -80,13 +120,13 @@ export default async function ContactPage() {
           <Section tone="white" spacing="compact" id="book" className="flex flex-col gap-3">
             <p className="eyebrow text-eyebrow">Office</p>
             <address className="not-italic">{site.address}</address>
-            <p className="text-small text-slate">{site.hours}</p>
+            {hasValue(site.hours) && <p className="text-small text-slate">{site.hours}</p>}
             <Button asChild variant="outline" className="mt-2">
               <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
                 Open in Maps
               </a>
             </Button>
-            <SchedulerButton label="Book a 30-minute call" />
+            <CallBackButton />
           </Section>
         )}
       </div>
@@ -94,11 +134,8 @@ export default async function ContactPage() {
       {/* Desktop: booking band and map */}
       <div className="hidden lg:block">
         <Section tone="white" spacing="compact" id="book-desktop" className="flex items-center justify-between">
-          <div>
-            <h2 className="text-h2">Prefer to talk?</h2>
-            <p className="text-small mt-3 text-slate">Pick a 30-minute slot that suits you.</p>
-          </div>
-          <SchedulerButton />
+          <h2 className="text-h2">Prefer to talk?</h2>
+          <CallBackButton />
         </Section>
         {site && (
           <Section spacing="compact">
@@ -106,13 +143,6 @@ export default async function ContactPage() {
           </Section>
         )}
       </div>
-
-      {faqs && faqs.length > 0 && (
-        <Section className="lg:pt-8">
-          <SectionHeading title="Before you write" className="md:mb-10" />
-          <FaqList faqs={faqs} />
-        </Section>
-      )}
     </>
   );
 }

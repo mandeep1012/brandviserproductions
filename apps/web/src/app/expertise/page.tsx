@@ -3,12 +3,12 @@ import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { CtaBand } from '@/components/common/CtaBand';
 import { EventImage } from '@/components/common/EventImage';
 import { Eyebrow } from '@/components/common/Eyebrow';
-import { ProcessStrip } from '@/components/common/ProcessSteps';
 import { Section } from '@/components/common/Section';
 import { SectionHeading } from '@/components/common/SectionHeading';
 import { ServiceMatrix } from '@/components/expertise/ServiceMatrix';
 import { ServiceSection } from '@/components/expertise/ServiceSection';
 import { ServiceSubnav } from '@/components/expertise/ServiceSubnav';
+import { WhyBrandviser } from '@/components/expertise/WhyBrandviser';
 import { api, optional } from '@/lib/api/server';
 import { ENQUIRY_HREF } from '@/lib/navigation';
 
@@ -21,11 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ExpertisePage() {
-  const [services, matrix, steps] = await Promise.all([
-    api.services(),
-    optional(api.serviceMatrix()),
-    api.processSteps(),
-  ]);
+  const [services, matrix] = await Promise.all([api.services(), optional(api.serviceMatrix())]);
   const collage = services.slice(0, 3);
 
   return (
@@ -38,9 +34,19 @@ export default async function ExpertisePage() {
           <h1 className="text-h1">
             One team, from first idea to <em className="text-metal">final teardown.</em>
           </h1>
-          <p className="max-w-[560px]">
-            Four practices under one roof, so your event has one plan, one budget and one point of contact.
-          </p>
+          <div className="flex max-w-[560px] flex-col gap-3">
+            <p>
+              Today, we stand as a premier partner for brands that demand more than “standard.” We are a collective of
+              strategists, designers, and production specialists dedicated to the art of the extraordinary.
+            </p>
+            <p>
+              We specialize in a dual-focus approach that combines high-precision print craftsmanship with world-class
+              event production, from MICE and bespoke international retreats to large-scale BTL activations. With a
+              pan-India presence, we deliver end-to-end campaigns across apartment communities, malls and roadshows,
+              managing everything from individual activations to large-scale, multi-city rollouts with consistency and
+              precision.
+            </p>
+          </div>
         </div>
         <div className="grid h-50 grid-cols-[2fr_1fr] grid-rows-2 gap-3 md:col-span-5 md:h-80">
           {collage.map((service, index) => (
@@ -69,8 +75,9 @@ export default async function ExpertisePage() {
         </Section>
       )}
 
-      <Section tone="white" spacing="compact">
-        <ProcessStrip steps={steps} />
+      <Section tone="white">
+        <SectionHeading title="Why BRANDVISER" className="md:mb-10" />
+        <WhyBrandviser />
       </Section>
 
       <CtaBand

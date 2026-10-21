@@ -15,11 +15,20 @@ export function Hero({ stats, imageUrl }: { stats: SiteStats | null; imageUrl: s
           <div className="flex flex-col justify-center gap-4 lg:col-span-7 lg:gap-6 lg:pr-12">
             <Eyebrow rule>360° event &amp; brand activation agency</Eyebrow>
             <h1 className="text-display">
-              Brand stories, staged in <em className="text-metal">every city</em> you sell in.
+              Designing experiences with purpose, presence and <em className="text-metal">precision.</em>
             </h1>
-            <p className="max-w-[520px] text-slate">
-              Concept, production, on-ground activation and digital amplification from one accountable team.
-            </p>
+            <div className="flex max-w-[520px] flex-col gap-3 text-slate">
+              <p>
+                BRANDVISER Productions is a leading event and experiential marketing company, creating impactful
+                experiences across MICE, conferences, exhibitions, and brand activations. With a strong presence across
+                400+ cities in India and 15+ countries internationally, we bring brands closer to their audiences.
+              </p>
+              <p>
+                Since 2015, our expertise has empowered businesses to connect, engage, and grow through seamless event
+                execution and innovative marketing solutions. From concept to execution, we transform ideas into
+                memorable experiences that inspire engagement and deliver measurable impact.
+              </p>
+            </div>
             <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-4">
               <Button asChild variant="gold">
                 <Link href={ENQUIRY_HREF}>Plan an event</Link>
@@ -40,7 +49,7 @@ export function Hero({ stats, imageUrl }: { stats: SiteStats | null; imageUrl: s
         {stats && (
           <StatsRow
             stats={stats}
-            keys={['citiesCovered', 'clientBrands', 'yearsExperience']}
+            keys={['citiesCovered', 'clientBrands', 'eventsDelivered', 'countriesCovered']}
             metal
             className="mt-8 border-t border-rule pt-4 md:mt-18 md:pt-8"
           />

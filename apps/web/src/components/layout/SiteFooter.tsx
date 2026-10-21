@@ -26,8 +26,8 @@ export function SiteFooter({ site, services }: { site: SiteInfo | null; services
       {/* Desktop: four columns */}
       <div className="hidden grid-cols-[2fr_1fr_1fr_1.5fr] gap-6 text-[15px] leading-7 md:grid">
         <div>
-          <Wordmark tagline="Productions Pvt. Ltd." className="md:[&_img]:h-10" />
-          {site && <p className="text-small mt-5 max-w-80 text-slate">{site.description}</p>}
+          <Wordmark tone="dark" className="h-11 lg:h-14 xl:h-16" />
+          {site && <p className="text-small mt-5 max-w-80 whitespace-pre-line text-slate">{site.description}</p>}
         </div>
         <nav aria-label="Expertise">
           <p className="eyebrow mb-3 text-eyebrow">Expertise</p>
@@ -61,7 +61,8 @@ export function SiteFooter({ site, services }: { site: SiteInfo | null; services
 
       {/* Mobile: collapsible rows */}
       <div className="text-base md:hidden">
-        <Wordmark tagline="Productions Pvt. Ltd." className="mb-6" />
+        <Wordmark tone="dark" className="mb-4 h-14" />
+        {site && <p className="text-small mb-6 whitespace-pre-line text-slate">{site.description}</p>}
         {[
           { title: 'Expertise', items: expertise },
           { title: 'Company', items: COMPANY_NAV },

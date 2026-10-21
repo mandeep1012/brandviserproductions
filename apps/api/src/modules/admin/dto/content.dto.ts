@@ -264,4 +264,5 @@ export class UpdateSiteDto {
   @IsOptional() @IsInt() @Min(0) clientBrands?: number | null;
   @IsOptional() @IsInt() @Min(0) eventsDelivered?: number | null;
   @IsOptional() @IsInt() @Min(0) yearsExperience?: number | null;
+  @IsOptional() @IsInt() @Min(0) countriesCovered?: number | null;
 }
